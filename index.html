@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kria — a custom programming language with a flat bytecode VM, written in Rust.">
+  <title>Kria — Programming Language</title>
+  <link rel="icon" href="assets/kria-ico.png" type="image/png">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script src="js/config.js"></script>
+  <script src="js/theme.js"></script>
+</head>
+<body data-page="index">
+  <main id="main-content">
+    <section class="hero">
+      <span class="hero-badge">Kria &middot; krx </span>
+      <h1>Kria Programming Language</h1>
+      <p class="lead">
+        A dynamic, strongly typed language with a flat bytecode VM and combined loop
+        instructions for high-performance execution. Write <code>.krx</code> files or use the
+        interactive REPL.
+      </p>
+      <div class="hero-actions">
+        <a href="docs.html" class="btn btn-primary">Read the docs</a>
+        <a href="download.html" class="btn btn-secondary">Download</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">How it works</h2>
+      <div class="pipeline">
+        <span class="pipeline-step">Source</span>
+        <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
+        <span class="pipeline-step">Lexer</span>
+        <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
+        <span class="pipeline-step">Parser</span>
+        <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
+        <span class="pipeline-step">Compiler</span>
+        <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
+        <span class="pipeline-step">VM</span>
+      </div>
+      <p style="margin-top: 1rem; color: var(--color-text-muted); font-size: 0.9375rem;">
+        Kria compiles source into flat bytecode with a constant pool, then runs it on a
+        stack-based VM with call frames for functions and closures.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Features</h2>
+      <div class="card-grid feature-grid">
+        <article class="card">
+          <h3>Interactive REPL</h3>
+          <p>Run <code>kria</code> with no arguments. Persistent session, multi-line input, and command history.</p>
+        </article>
+        <article class="card">
+          <h3>Functions &amp; Closures</h3>
+          <p>Named functions, lambdas, and nested closures with copy-on-create capture semantics.</p>
+        </article>
+        <article class="card">
+          <h3>Arrays &amp; Objects</h3>
+          <p>Mutable and immutable arrays, object literals, deep equality, and <code>for-in</code> iteration.</p>
+        </article>
+        <article class="card">
+          <h3>Modules</h3>
+          <p>Multi-file projects with <code>export fn</code> and <code>import alias from "./file.krx"</code>.</p>
+        </article>
+        <article class="card">
+          <h3>Performance</h3>
+          <p>Combined loop opcodes like <code>OP_LOOP_INC_LESS</code> reduce hot-path dispatch overhead.</p>
+        </article>
+        <article class="card">
+          <h3>Dynamic Typing</h3>
+          <p>Strong, dynamic types with null for undefined variables. Newline-based statements, no semicolons.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section fade-in">
+      <h2 class="section-title">Quick example</h2>
+      <pre><code>fn greet(name) {
+    return "Hello, " + name
+}
+
+set message = greet("Kria")
+print(message)</code></pre>
+      <a href="docs.html" class="btn btn-secondary">Explore documentation</a>
+    </section>
+  </main>
+
+  <script src="js/layout.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

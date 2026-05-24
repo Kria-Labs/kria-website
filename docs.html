@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kria programming language documentation.">
+  <title>Documentation — Kria</title>
+  <link rel="icon" href="assets/kria-ico.png" type="image/png">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script src="js/config.js"></script>
+  <script src="js/theme.js"></script>
+</head>
+<body data-page="docs">
+  <main id="main-content">
+    <header class="page-header">
+      <h1>Documentation</h1>
+      <p class="lead">Learn Kria from basics to advanced topics. Detailed guides for each section are coming soon.</p>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-sidebar" aria-label="Documentation sections">
+        <nav>
+          <ul>
+            <li><a href="#getting-started">Getting Started</a></li>
+            <li><a href="#language-basics">Language Basics</a></li>
+            <li><a href="#control-flow">Control Flow</a></li>
+            <li><a href="#functions">Functions &amp; Closures</a></li>
+            <li><a href="#arrays-objects">Arrays &amp; Objects</a></li>
+            <li><a href="#modules">Modules &amp; Imports</a></li>
+            <li><a href="#input">Input</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="docs-main">
+        <section class="content-block" id="quick-start">
+          <h2>Quick start</h2>
+          <p>Save a file as <code>hello.krx</code> and run it with <code>kria hello.krx</code>:</p>
+          <pre><code>set x = 5
+set y = 3
+print(x + y)</code></pre>
+          <p>Or start the REPL: <code>kria</code> with no arguments.</p>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Documentation sections</h2>
+          <div class="card-grid docs-cards">
+            <a href="#getting-started" class="card card-link" id="getting-started">
+              <h3>Getting Started</h3>
+              <p>Install Kria, run your first <code>.krx</code> file, and use the interactive REPL with meta commands.</p>
+            </a>
+            <a href="#language-basics" class="card card-link" id="language-basics">
+              <h3>Language Basics</h3>
+              <p>Variables with <code>set</code>, dynamic types, arithmetic, comparisons, and logical operators.</p>
+            </a>
+            <a href="#control-flow" class="card card-link" id="control-flow">
+              <h3>Control Flow</h3>
+              <p><code>if</code> / <code>elseif</code> / <code>else</code>, <code>while</code>, <code>for-in</code>, <code>break</code>, and <code>continue</code>.</p>
+            </a>
+            <a href="#functions" class="card card-link" id="functions">
+              <h3>Functions &amp; Closures</h3>
+              <p>Named functions, lambdas, <code>return</code>, parameters, and copy-on-create closure capture.</p>
+            </a>
+            <a href="#arrays-objects" class="card card-link" id="arrays-objects">
+              <h3>Arrays &amp; Objects</h3>
+              <p>Mutable <code>[...]</code> and immutable <code>#[...]</code> arrays, objects, indexing, and deep equality.</p>
+            </a>
+            <a href="#modules" class="card card-link" id="modules">
+              <h3>Modules &amp; Imports</h3>
+              <p><code>export fn</code>, <code>import alias from "./file.krx"</code>, and multi-file project layout.</p>
+            </a>
+            <a href="#input" class="card card-link" id="input">
+              <h3>Input</h3>
+              <p>Read from stdin with <code>input&lt;str&gt;</code>, <code>input&lt;int&gt;</code>, and <code>input&lt;float&gt;</code>.</p>
+            </a>
+            <a href="#architecture" class="card card-link" id="architecture">
+              <h3>Architecture</h3>
+              <p>Lexer, parser, compiler, flat bytecode, constant pool, and stack-based VM with optimizations.</p>
+            </a>
+          </div>
+          <p style="margin-top: 1.5rem; font-size: 0.9375rem; color: var(--color-text-muted);">
+            Full guides for each section will be added in future updates. For now, refer to the
+            <a id="github-docs-link" href="#">kria-lang repository</a> for the complete language reference.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/layout.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    (function () {
+      var link = document.getElementById("github-docs-link");
+      if (link && typeof KRIA_LINKS !== "undefined") {
+        link.href = KRIA_LINKS.lang;
+      }
+    })();
+  </script>
+</body>
+</html>

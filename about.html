@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About Kria Labs and the Kria programming language.">
+  <title>About — Kria</title>
+  <link rel="icon" href="assets/kria-ico.png" type="image/png">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script src="js/config.js"></script>
+  <script src="js/theme.js"></script>
+</head>
+<body data-page="about">
+  <main id="main-content">
+    <header class="page-header">
+      <h1>About Kria</h1>
+      <p class="lead">Built by Kria Labs — a language focused on clarity, performance, and approachable syntax.</p>
+    </header>
+
+    <section class="content-block">
+      <h2>Our mission</h2>
+      <p>
+        Kria is a custom programming language designed to be easy to learn and fast to run.
+        We combine a readable, newline-based syntax with a performance-oriented bytecode VM
+        that optimizes common patterns like counted loops and global arithmetic.
+      </p>
+      <p>
+        Whether you are prototyping in the REPL or building multi-file projects with modules,
+        Kria aims to stay small, predictable, and fun to use.
+      </p>
+    </section>
+
+    <section class="content-block">
+      <h2>Implementation</h2>
+      <p>
+        The Kria interpreter and compiler are written in <strong>Rust</strong>. The pipeline
+        uses a recursive-descent parser, a flat bytecode format with a constant pool, and a
+        stack-based virtual machine with call frames for functions and closures.
+      </p>
+    </section>
+
+    <section class="content-block">
+      <h2>Design goals</h2>
+      <ul>
+        <li><strong>Simple syntax</strong> — no semicolons, <code>set</code> for assignment, familiar control flow</li>
+        <li><strong>Dynamic + strong typing</strong> — runtime types with predictable behavior</li>
+        <li><strong>Performance</strong> — combined loop instructions and specialized global ops</li>
+        <li><strong>Modularity</strong> — file-based modules today; KPM package manager planned</li>
+        <li><strong>Developer experience</strong> — REPL with history, multi-line blocks, and meta commands</li>
+      </ul>
+    </section>
+
+    <section class="content-block">
+      <h2>License</h2>
+      <p>
+        Kria is released under the <strong>MIT License</strong>. You are free to use, modify,
+        and distribute the software with minimal restrictions. See the
+        <a href="LICENSE">LICENSE</a> file in the repository for full terms.
+      </p>
+    </section>
+
+    <section class="content-block">
+      <h2>Ecosystem</h2>
+      <ul>
+        <li><a id="link-org" href="#" target="_blank" rel="noopener noreferrer">Kria Labs</a> on GitHub</li>
+        <li><a id="link-lang" href="#" target="_blank" rel="noopener noreferrer">kria-lang</a> — language interpreter and compiler</li>
+        <li><a id="link-vscode" href="#" target="_blank" rel="noopener noreferrer">kria-vscode</a> — VS Code extension</li>
+        <li><a id="link-kpm" href="#" target="_blank" rel="noopener noreferrer">kpm</a> — package manager (in development)</li>
+        <li><a id="link-website" href="#" target="_blank" rel="noopener noreferrer">kria-website</a> — this documentation site</li>
+      </ul>
+    </section>
+
+    <section class="content-block fade-in">
+      <h2>Get involved</h2>
+      <p>
+        Source code, issues, and contributions are welcome on
+        <a id="github-about-link" href="#">GitHub</a>.
+      </p>
+      <div class="hero-actions">
+        <a href="docs.html" class="btn btn-primary">Documentation</a>
+        <a href="download.html" class="btn btn-secondary">Download</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/layout.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    (function () {
+      if (typeof KRIA_LINKS === "undefined") return;
+      var map = {
+        "link-org": KRIA_LINKS.org,
+        "link-lang": KRIA_LINKS.lang,
+        "link-vscode": KRIA_LINKS.vscode,
+        "link-kpm": KRIA_LINKS.kpm,
+        "link-website": KRIA_LINKS.website,
+        "github-about-link": KRIA_LINKS.lang,
+      };
+      Object.keys(map).forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.href = map[id];
+      });
+    })();
+  </script>
+</body>
+</html>
