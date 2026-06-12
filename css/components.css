@@ -199,7 +199,7 @@ html[data-theme="dark"] .icon-sun {
 .footer-inner {
   max-width: 72rem;
   margin: 0 auto;
-  padding: 1.5rem 1rem;
+  padding: 1rem 1rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
