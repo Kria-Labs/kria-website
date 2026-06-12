@@ -31,3 +31,47 @@ html[data-theme="dark"] {
   --header-bg: rgba(15, 15, 15, 0.92);
   --focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.4);
 }
+
+/* Scrollbar Styling */
+html {
+  scrollbar-color: #999999 #f9fafb;
+  scrollbar-width: thin;
+}
+
+html[data-theme="dark"] {
+  scrollbar-color: #555555 #1a1a1a;
+}
+
+/* Webkit Browsers (Chrome, Safari, Edge) - Light Theme */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-elevated);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #999999;
+  border-radius: 5px;
+  border: 2px solid var(--color-bg-elevated);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #666666;
+}
+
+/* Webkit Browsers - Dark Theme */
+html[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--color-bg-elevated);
+}
+
+html[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #555555;
+  border-color: var(--color-bg-elevated);
+}
+
+html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #777777;
+}

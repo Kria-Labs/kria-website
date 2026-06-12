@@ -11,11 +11,12 @@
         };
 
   const navItems = [
-    { href: "index.html", label: "Home", id: "index" },
-    { href: "docs.html", label: "Docs", id: "docs" },
-    { href: "download.html", label: "Download", id: "download" },
-    { href: "kpm.html", label: "KPM", id: "kpm" },
-    { href: "about.html", label: "About", id: "about" },
+    { href: "/index.html", label: "Home", id: "index" },
+    { href: "/docs.html", label: "Docs", id: "docs" },
+    { href: "/playground.html", label: "Playground", id: "playground" },
+    { href: "/download.html", label: "Download", id: "download" },
+    { href: "/kpm.html", label: "KPM", id: "kpm" },
+    { href: "/about.html", label: "About", id: "about" },
   ];
 
   function navLinks(className) {
@@ -31,8 +32,8 @@
     <a href="#main-content" class="skip-link">Skip to content</a>
     <header class="site-header">
       <div class="header-inner">
-        <a href="index.html" class="logo">
-          <img src="assets/kria-ico.png" alt="" class="logo-img" width="28" height="28">
+        <a href="/index.html" class="logo">
+          <img src="/assets/kria-ico.png" alt="" class="logo-img" width="28" height="28">
           <span class="logo-text">Kria</span>
         </a>
         <nav class="nav-desktop" aria-label="Main navigation">
@@ -66,7 +67,7 @@
           <li><a href="${links.lang}" target="_blank" rel="noopener noreferrer">kria-lang</a></li>
           <li><a href="${links.vscode}" target="_blank" rel="noopener noreferrer">VS Code</a></li>
           <li><a href="${links.kpm}" target="_blank" rel="noopener noreferrer">KPM</a></li>
-          <li><a href="docs.html">Docs</a></li>
+          <li><a href="/docs.html">Docs</a></li>
           <li><a href="${links.website}" target="_blank" rel="noopener noreferrer">Site source</a></li>
         </ul>
       </div>
