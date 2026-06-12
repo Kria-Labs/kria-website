@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kria compiler and runtime architecture.">
+  <title>Architecture — Kria Documentation</title>
+  <link rel="icon" href="../assets/kria-ico.png" type="image/png">
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <script src="../js/config.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body data-page="docs">
+  <main id="main-content">
+    <header class="page-header">
+      <h1>Architecture</h1>
+      <p class="lead">Compiler pipeline, bytecode format, and virtual machine internals.</p>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-sidebar" aria-label="Architecture sections">
+        <nav>
+          <ul>
+            <li><a href="../docs.html">← Back to Docs</a></li>
+            <li class="section-title">This Page</li>
+            <li><a href="#pipeline">Compilation Pipeline</a></li>
+            <li><a href="#lexer">Lexer</a></li>
+            <li><a href="#parser">Parser</a></li>
+            <li><a href="#compiler">Compiler</a></li>
+            <li><a href="#bytecode">Bytecode & Constants</a></li>
+            <li><a href="#vm">Virtual Machine</a></li>
+            <li><a href="#optimization">Optimizations</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="docs-main">
+        <section class="content-block" id="pipeline">
+          <h2>Compilation Pipeline</h2>
+          <p>
+            Kria programs are compiled through multiple stages before execution:
+          </p>
+          <pre><code>Source (.krx) → Lexer → Parser → Compiler → Bytecode → VM</code></pre>
+          <p>
+            Each stage transforms the input into an intermediate representation. 
+            The final bytecode is executed on a stack-based virtual machine.
+          </p>
+        </section>
+
+        <section class="content-block" id="lexer">
+          <h2>Lexer (Tokenization)</h2>
+          <p>
+            The lexer reads the source code and produces a stream of tokens.
+          </p>
+          <p>
+            <strong>Input:</strong> Source code (text)
+          </p>
+          <p>
+            <strong>Output:</strong> Token stream
+          </p>
+          <p>
+            <strong>Responsibilities:</strong>
+          </p>
+          <ul>
+            <li>Recognize keywords, identifiers, literals, and operators</li>
+            <li>Handle string literals (single and multi-line)</li>
+            <li>Process comments (single-line and block)</li>
+            <li>Track line and column numbers for error reporting</li>
+          </ul>
+          <p>
+            The lexer is a straightforward tokenizer with no lookahead complexity.
+          </p>
+        </section>
+
+        <section class="content-block" id="parser">
+          <h2>Parser (Syntax Analysis)</h2>
+          <p>
+            The parser reads tokens and produces an Abstract Syntax Tree (AST).
+          </p>
+          <p>
+            <strong>Input:</strong> Token stream
+          </p>
+          <p>
+            <strong>Output:</strong> AST (Abstract Syntax Tree)
+          </p>
+          <p>
+            <strong>Method:</strong> Recursive descent parser
+          </p>
+          <p>
+            The parser builds a tree representing the program structure:
+          </p>
+          <ul>
+            <li>Expressions (literals, operators, function calls)</li>
+            <li>Statements (assignments, control flow)</li>
+            <li>Functions and blocks</li>
+          </ul>
+        </section>
+
+        <section class="content-block" id="compiler">
+          <h2>Compiler (Code Generation)</h2>
+          <p>
+            The compiler traverses the AST and generates bytecode.
+          </p>
+          <p>
+            <strong>Input:</strong> AST
+          </p>
+          <p>
+            <strong>Output:</strong> Bytecode with constant pool
+          </p>
+          <p>
+            <strong>Key features:</strong>
+          </p>
+          <ul>
+            <li>Single-pass compilation</li>
+            <li>Constant pool for literals and symbols</li>
+            <li>Function bytecode with metadata</li>
+            <li>Module resolution and import flattening</li>
+          </ul>
+        </section>
+
+        <section class="content-block" id="bytecode">
+          <h2>Bytecode & Constants</h2>
+          <p>
+            Kria uses a flat bytecode format with a constant pool.
+          </p>
+          <h3>Constant Pool</h3>
+          <p>
+            All literals and symbols are stored in a constant pool, indexed by bytecode instructions:
+          </p>
+          <ul>
+            <li>String literals</li>
+            <li>Numbers</li>
+            <li>Function names</li>
+            <li>Variable names</li>
+            <li>Object property keys</li>
+          </ul>
+          <h3>Instruction Format</h3>
+          <p>
+            Instructions are variable-length, encoding an opcode and optional operands:
+          </p>
+          <ul>
+            <li><code>OP_PUSH_CONST</code> — Push a constant onto the stack</li>
+            <li><code>OP_POP</code> — Pop the top stack value</li>
+            <li><code>OP_CALL_FUNCTION</code> — Call a function</li>
+            <li><code>OP_JUMP</code> — Unconditional jump</li>
+            <li><code>OP_LOOP_INC_LESS</code> — Combined increment-and-loop (optimization)</li>
+          </ul>
+          <p>
+            See the source code for the full opcode list.
+          </p>
+        </section>
+
+        <section class="content-block" id="vm">
+          <h2>Virtual Machine</h2>
+          <p>
+            The VM is a stack-based interpreter that executes bytecode.
+          </p>
+          <h3>Stack-Based Design</h3>
+          <p>
+            All operations work on a value stack:
+          </p>
+          <ul>
+            <li>Push operands onto the stack</li>
+            <li>Execute operations (pop operands, push results)</li>
+            <li>Return values stay on stack</li>
+          </ul>
+          <h3>Call Frames</h3>
+          <p>
+            Each function call has a frame:
+          </p>
+          <ul>
+            <li>Local variables (in a hash map)</li>
+            <li>Return address (bytecode offset)</li>
+            <li>Parent frame (for closure capture)</li>
+          </ul>
+          <h3>Global Scope</h3>
+          <p>
+            Global variables are stored in a separate hash map. 
+            Functions can access and modify globals.
+          </p>
+        </section>
+
+        <section class="content-block" id="optimization">
+          <h2>Optimizations</h2>
+          <p>
+            Kria includes several runtime optimizations:
+          </p>
+          <h3>Combined Loop Instructions</h3>
+          <p>
+            Counted loops compile to specialized opcodes that combine multiple operations:
+          </p>
+          <ul>
+            <li><code>OP_LOOP_INC_LESS</code> — Increment and compare in one instruction</li>
+            <li><code>OP_LOOP_INC_LTE</code> — Increment and compare (less-than-or-equal)</li>
+          </ul>
+          <p>
+            This reduces dispatch overhead for tight loops.
+          </p>
+          <h3>Global Variable Optimizations</h3>
+          <p>
+            Global arithmetic operations are optimized to avoid function call overhead.
+          </p>
+          <h3>Constant Folding</h3>
+          <p>
+            Compile-time constant expressions are pre-computed.
+          </p>
+        </section>
+
+        <section class="content-block" id="source">
+          <h2>Source Code</h2>
+          <p>
+            The Kria interpreter is written in Rust. 
+            Source files include:
+          </p>
+          <ul>
+            <li><code>src/lexer.rs</code> — Tokenization</li>
+            <li><code>src/parser.rs</code> — AST generation</li>
+            <li><code>src/compiler.rs</code> — Bytecode generation</li>
+            <li><code>src/vm.rs</code> — Runtime execution</li>
+            <li><code>src/repl.rs</code> — Interactive REPL</li>
+            <li><code>src/modules.rs</code> — Multi-file import system</li>
+          </ul>
+          <p>
+            Explore the 
+            <a href="https://github.com/krialabs/kria-lang" target="_blank">kria-lang repository</a> 
+            for the full implementation.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/layout.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

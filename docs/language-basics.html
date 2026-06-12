@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn language basics in Kria.">
+  <title>Language Basics — Kria Documentation</title>
+  <link rel="icon" href="../assets/kria-ico.png" type="image/png">
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <script src="../js/config.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body data-page="docs">
+  <main id="main-content">
+    <header class="page-header">
+      <h1>Language Basics</h1>
+      <p class="lead">Variables, types, operators, and fundamental language concepts.</p>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-sidebar" aria-label="Language Basics sections">
+        <nav>
+          <ul>
+            <li><a href="../docs.html">← Back to Docs</a></li>
+            <li class="section-title">This Page</li>
+            <li><a href="#variables">Variables</a></li>
+            <li><a href="#types">Data Types</a></li>
+            <li><a href="#operators">Operators</a></li>
+            <li><a href="#comparisons">Comparisons</a></li>
+            <li><a href="#type-checking">Type Checking</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="docs-main">
+        <section class="content-block" id="variables">
+          <h2>Variables</h2>
+          <p>
+            Kria uses the <code>set</code> keyword to declare and assign variables. 
+            Variables are dynamically typed and can hold any value.
+          </p>
+          <h3>Example</h3>
+          <pre><code>set x = 10
+set y = 20
+set sum = x + y
+print(sum)</code></pre>
+          <p>
+            Variables persist during a session (in the REPL) or throughout a program. 
+            There are no special constants or immutable bindings.
+          </p>
+        </section>
+
+        <section class="content-block" id="types">
+          <h2>Data Types</h2>
+          <p>Kria has 7 primitive types:</p>
+          <ul>
+            <li><strong>Number</strong> — Integers and floats (unified as "number")</li>
+            <li><strong>String</strong> — Text values with double quotes</li>
+            <li><strong>Boolean</strong> — <code>true</code> or <code>false</code></li>
+            <li><strong>Null</strong> — Represents undefined values</li>
+            <li><strong>Array</strong> — Mutable ordered collections</li>
+            <li><strong>Object</strong> — Key-value pairs</li>
+            <li><strong>Function</strong> — First-class functions and closures</li>
+          </ul>
+          <h3>Example</h3>
+          <pre><code>set name = "Kria"
+set isActive = true
+set value = null
+print(name)</code></pre>
+        </section>
+
+        <section class="content-block" id="operators">
+          <h2>Arithmetic Operators</h2>
+          <p>
+            Kria supports standard arithmetic operations on numbers:
+          </p>
+          <table class="compare-table">
+            <tr>
+              <th>Operator</th>
+              <th>Operation</th>
+              <th>Example</th>
+            </tr>
+            <tr>
+              <td><code>+</code></td>
+              <td>Addition</td>
+              <td><code>10 + 5 = 15</code></td>
+            </tr>
+            <tr>
+              <td><code>-</code></td>
+              <td>Subtraction</td>
+              <td><code>10 - 5 = 5</code></td>
+            </tr>
+            <tr>
+              <td><code>*</code></td>
+              <td>Multiplication</td>
+              <td><code>10 * 5 = 50</code></td>
+            </tr>
+            <tr>
+              <td><code>/</code></td>
+              <td>Division</td>
+              <td><code>10 / 2 = 5</code></td>
+            </tr>
+          </table>
+          <h3>Example</h3>
+          <pre><code>set x = 10
+set product = x * 20
+print(product)
+set quotient = 20 / x
+print(quotient)</code></pre>
+        </section>
+
+        <section class="content-block" id="comparisons">
+          <h2>Comparison & Logical Operators</h2>
+          <p>
+            Compare values with relational operators. Combine conditions with logical operators:
+          </p>
+          <table class="compare-table">
+            <tr>
+              <th>Operator</th>
+              <th>Meaning</th>
+              <th>Example</th>
+            </tr>
+            <tr>
+              <td><code>==</code></td>
+              <td>Equal to</td>
+              <td><code>5 == 5</code> is true</td>
+            </tr>
+            <tr>
+              <td><code>!=</code></td>
+              <td>Not equal</td>
+              <td><code>5 != 3</code> is true</td>
+            </tr>
+            <tr>
+              <td><code>&gt;</code></td>
+              <td>Greater than</td>
+              <td><code>10 > 5</code> is true</td>
+            </tr>
+            <tr>
+              <td><code>&lt;</code></td>
+              <td>Less than</td>
+              <td><code>5 < 10</code> is true</td>
+            </tr>
+            <tr>
+              <td><code>&gt;=</code></td>
+              <td>Greater or equal</td>
+              <td><code>10 >= 10</code> is true</td>
+            </tr>
+            <tr>
+              <td><code>&lt;=</code></td>
+              <td>Less or equal</td>
+              <td><code>5 <= 10</code> is true</td>
+            </tr>
+            <tr>
+              <td><code>and</code></td>
+              <td>Logical AND</td>
+              <td><code>true and false</code> is false</td>
+            </tr>
+            <tr>
+              <td><code>or</code></td>
+              <td>Logical OR</td>
+              <td><code>true or false</code> is true</td>
+            </tr>
+            <tr>
+              <td><code>not</code></td>
+              <td>Logical NOT</td>
+              <td><code>not false</code> is true</td>
+            </tr>
+          </table>
+          <h3>Example</h3>
+          <pre><code>set x = 10
+set y = 20
+if (x < y and y > 15) {
+    print("Both conditions true")
+}</code></pre>
+        </section>
+
+        <section class="content-block" id="type-checking">
+          <h2>Type Checking</h2>
+          <p>
+            Use the <code>type()</code> built-in function to check a value's type at runtime:
+          </p>
+          <pre><code>print(type(42))
+print(type("hello"))
+print(type(true))
+print(type(null))</code></pre>
+          <p>
+            Returns one of: <code>"number"</code>, <code>"string"</code>, <code>"boolean"</code>, 
+            <code>"null"</code>, <code>"array"</code>, <code>"object"</code>, or <code>"function"</code>.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/layout.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Performance and optimization tips for Kria.">
+  <title>Performance & Optimization — Kria Documentation</title>
+  <link rel="icon" href="../assets/kria-ico.png" type="image/png">
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <script src="../js/config.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body data-page="docs">
+  <main id="main-content">
+    <header class="page-header">
+      <h1>Performance & Optimization</h1>
+      <p class="lead">Best practices, algorithms, and performance tips.</p>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-sidebar" aria-label="Performance sections">
+        <nav>
+          <ul>
+            <li><a href="../docs.html">← Back to Docs</a></li>
+            <li class="section-title">This Page</li>
+            <li><a href="#loops">Loop Optimization</a></li>
+            <li><a href="#algorithms">Algorithm Patterns</a></li>
+            <li><a href="#best-practices">Best Practices</a></li>
+            <li><a href="#benchmarking">Benchmarking</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="docs-main">
+        <section class="content-block" id="loops">
+          <h2>Loop Optimization</h2>
+          <p>
+            Kria's VM includes combined loop instructions that optimize counting loops. 
+            The compiler recognizes patterns like <code>i = i + 1</code> and generates specialized bytecode.
+          </p>
+          <h3>Counted Loop Pattern</h3>
+          <p>
+            The fastest loops follow this pattern:
+          </p>
+          <pre><code>set i = 0
+while (i < 1000000) {
+    set i = i + 1
+}</code></pre>
+          <p>
+            This pattern compiles to a single specialized opcode, 
+            reducing dispatch overhead on each iteration.
+          </p>
+          <h3>Loop Structure Tips</h3>
+          <ul>
+            <li>Use <code>while</code> for counted loops</li>
+            <li>Use <code>for-in</code> for iterating collections</li>
+            <li>Avoid function calls in hot loops when possible</li>
+            <li>Minimize operations in loop bodies</li>
+          </ul>
+        </section>
+
+        <section class="content-block" id="algorithms">
+          <h2>Algorithm Patterns</h2>
+          <p>
+            Kria supports powerful algorithms. Here are some common patterns:
+          </p>
+          <h3>Prime Number Check</h3>
+          <pre><code>fn is_prime(n) {
+    if (n < 2) {
+        return false
+    }
+    if (n == 2) {
+        return true
+    }
+    
+    set divisor = 2
+    while (divisor * divisor <= n) {
+        set remainder = n - (divisor * (n / divisor))
+        if (remainder == 0) {
+            return false
+        }
+        set divisor = divisor + 1
+    }
+    return true
+}</code></pre>
+          <h3>GCD (Greatest Common Divisor)</h3>
+          <pre><code>fn gcd(a, b) {
+    while (b != 0) {
+        set temp = b
+        set remainder = a - (b * (a / b))
+        set a = temp
+        set b = remainder
+    }
+    return a
+}</code></pre>
+          <h3>Fibonacci (Recursive)</h3>
+          <pre><code>fn fibonacci(n) {
+    if (n <= 1) {
+        return n
+    } else {
+        set n1 = n - 1
+        set n2 = n - 2
+        return fibonacci(n1) + fibonacci(n2)
+    }
+}</code></pre>
+          <p>
+            Recursive algorithms are powerful but can be slow for large inputs due to repeated calls. 
+            Consider memoization or iterative approaches for better performance.
+          </p>
+        </section>
+
+        <section class="content-block" id="best-practices">
+          <h2>Best Practices</h2>
+          <ul>
+            <li>
+              <strong>Use appropriate data structures</strong> — Arrays for sequences, objects for key-value data
+            </li>
+            <li>
+              <strong>Minimize scope</strong> — Define variables only where needed
+            </li>
+            <li>
+              <strong>Avoid deep nesting</strong> — Refactor complex logic into functions
+            </li>
+            <li>
+              <strong>Cache computed values</strong> — Store results you'll use multiple times
+            </li>
+            <li>
+              <strong>Profile before optimizing</strong> — Measure to find actual bottlenecks
+            </li>
+            <li>
+              <strong>Use built-in functions</strong> — They are optimized in the VM
+            </li>
+          </ul>
+        </section>
+
+        <section class="content-block" id="benchmarking">
+          <h2>Benchmarking</h2>
+          <p>
+            Use <code>wait()</code> to measure execution time of code sections:
+          </p>
+          <pre><code>fn timed_operation() {
+    set i = 0
+    while (i < 1000000) {
+        set i = i + 1
+    }
+}
+
+print("Starting benchmark...")
+timed_operation()
+print("Completed")</code></pre>
+          <p>
+            For more detailed benchmarking, wrap code sections and use system timing. 
+            The Kria repository includes performance test examples.
+          </p>
+          <p>
+            When optimizing:
+          </p>
+          <ul>
+            <li>Test with realistic data sizes</li>
+            <li>Consider both time and readability</li>
+            <li>Profile different approaches</li>
+            <li>Share benchmarks in pull requests for optimization PRs</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/layout.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

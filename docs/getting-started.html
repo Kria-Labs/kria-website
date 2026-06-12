@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get started with Kria programming language.">
+  <title>Getting Started — Kria Documentation</title>
+  <link rel="icon" href="../assets/kria-ico.png" type="image/png">
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <script src="../js/config.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body data-page="docs">
+  <main id="main-content">
+    <header class="page-header">
+      <h1>Getting Started</h1>
+      <p class="lead">Install Kria, run your first program, and explore the interactive REPL.</p>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-sidebar" aria-label="Getting Started sections">
+        <nav>
+          <ul>
+            <li><a href="../docs.html">← Back to Docs</a></li>
+            <li class="section-title">This Page</li>
+            <li><a href="#prerequisites">Prerequisites</a></li>
+            <li><a href="#installation">Installation</a></li>
+            <li><a href="#hello-world">Hello World</a></li>
+            <li><a href="#repl">Interactive REPL</a></li>
+            <li><a href="#next-steps">Next Steps</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="docs-main">
+        <section class="content-block" id="prerequisites">
+          <h2>Prerequisites</h2>
+          <p>
+            To build Kria from source, you need <strong>Rust 2021 edition or later</strong>.
+            Install Rust using <a href="https://rustup.rs/" target="_blank">rustup</a>.
+          </p>
+          <pre><code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code></pre>
+        </section>
+
+        <section class="content-block" id="installation">
+          <h2>Installation</h2>
+          <p>Clone the repository and build Kria in release mode:</p>
+          <pre><code>git clone https://github.com/krialabs/kria-lang.git
+cd kria-lang
+cargo build --release</code></pre>
+          <p>
+            The compiled binary will be at <code>target/release/kria</code>. 
+            You can add it to your PATH or run it directly.
+          </p>
+        </section>
+
+        <section class="content-block" id="hello-world">
+          <h2>Your First Program</h2>
+          <p>Create a file named <code>hello.krx</code>:</p>
+          <pre><code>set x = 5
+set y = 3
+print(x + y)</code></pre>
+          <p>Run it with:</p>
+          <pre><code>./target/release/kria hello.krx</code></pre>
+          <p>Output: <code>8</code></p>
+        </section>
+
+        <section class="content-block" id="repl">
+          <h2>Interactive REPL</h2>
+          <p>
+            Start the interactive Read-Eval-Print Loop with no arguments:
+          </p>
+          <pre><code>./target/release/kria</code></pre>
+          <p>
+            The REPL provides a persistent session where variables and functions stay in scope 
+            until you reset or exit.
+          </p>
+          <h3>Meta Commands</h3>
+          <ul>
+            <li><code>:help</code> — Show available commands</li>
+            <li><code>:reset</code> — Clear all variables and functions</li>
+            <li><code>:exit</code> — Exit the REPL</li>
+          </ul>
+          <p>Try this in the REPL:</p>
+          <pre><code>set name = "Kria"
+print(name)
+fn greet(x) { return "Hello, " + x }
+greet(name)</code></pre>
+        </section>
+
+        <section class="content-block" id="next-steps">
+          <h2>Next Steps</h2>
+          <p>
+            Now that you have Kria running, explore the other documentation sections:
+          </p>
+          <ul>
+            <li><a href="language-basics.html">Language Basics</a> — Learn about variables, types, and operators</li>
+            <li><a href="control-flow.html">Control Flow</a> — Master if/else, loops, and jumps</li>
+            <li><a href="functions-closures.html">Functions & Closures</a> — Define and use functions</li>
+            <li><a href="arrays-objects.html">Arrays & Objects</a> — Work with collections</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/layout.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

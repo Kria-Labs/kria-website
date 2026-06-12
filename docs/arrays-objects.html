@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn arrays and objects in Kria.">
+  <title>Arrays & Objects — Kria Documentation</title>
+  <link rel="icon" href="../assets/kria-ico.png" type="image/png">
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <script src="../js/config.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body data-page="docs">
+  <main id="main-content">
+    <header class="page-header">
+      <h1>Arrays & Objects</h1>
+      <p class="lead">Work with collections: mutable arrays, immutable arrays, and objects.</p>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-sidebar" aria-label="Arrays & Objects sections">
+        <nav>
+          <ul>
+            <li><a href="../docs.html">← Back to Docs</a></li>
+            <li class="section-title">This Page</li>
+            <li><a href="#mutable-arrays">Mutable Arrays</a></li>
+            <li><a href="#immutable-arrays">Immutable Arrays</a></li>
+            <li><a href="#objects">Objects</a></li>
+            <li><a href="#equality">Equality</a></li>
+            <li><a href="#iteration">Iteration</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="docs-main">
+        <section class="content-block" id="mutable-arrays">
+          <h2>Mutable Arrays</h2>
+          <p>
+            Create mutable arrays with square brackets <code>[...]</code>. 
+            Modify elements or add/remove items:
+          </p>
+          <pre><code>set arr = [10, 20, 30]
+print(arr)
+print(arr.length)
+
+set x = arr[0]
+arr[0] = 99
+print(arr[0])
+
+push(arr, 40)
+set last = pop(arr)
+print(arr)</code></pre>
+          <h3>Array Methods</h3>
+          <ul>
+            <li><code>.length</code> — Get the number of elements</li>
+            <li><code>[index]</code> — Access or modify element</li>
+            <li><code>push(array, value)</code> — Add element to end</li>
+            <li><code>pop(array)</code> — Remove and return last element</li>
+          </ul>
+        </section>
+
+        <section class="content-block" id="immutable-arrays">
+          <h2>Immutable Arrays</h2>
+          <p>
+            Create immutable arrays with <code>#[...]</code>. 
+            You can read elements but cannot modify them:
+          </p>
+          <pre><code>set frozen = #[1, 2, 3]
+print(frozen)
+print(frozen.length)
+print(frozen[1])</code></pre>
+          <p>
+            Immutable arrays are useful for data that should not change. 
+            Attempting to modify will cause an error.
+          </p>
+        </section>
+
+        <section class="content-block" id="objects">
+          <h2>Objects</h2>
+          <p>
+            Create objects with key-value pairs using curly braces <code>{...}</code>:
+          </p>
+          <pre><code>set user = { name: "Michael", age: 27 }
+print(user)
+print(user.name)
+print(user.age)
+
+user.age = 18
+user["name"] = "Arda K"
+print(user)</code></pre>
+          <h3>Accessing Properties</h3>
+          <ul>
+            <li><code>obj.key</code> — Dot notation (preferred)</li>
+            <li><code>obj["key"]</code> — Bracket notation</li>
+          </ul>
+          <h3>Object Methods</h3>
+          <pre><code>rmv(user.name)
+print(user.name)</code></pre>
+          <p>
+            Use <code>rmv()</code> to delete a property. 
+            Accessing a missing property returns <code>null</code>.
+          </p>
+        </section>
+
+        <section class="content-block" id="equality">
+          <h2>Deep Equality</h2>
+          <p>
+            Arrays and objects are compared by value, not reference:
+          </p>
+          <pre><code>set a = [1, 2]
+set b = [1, 2]
+if (a == b) {
+    print("Equal!")
+}
+
+set obj1 = { x: 1, y: 2 }
+set obj2 = { y: 2, x: 1 }
+if (obj1 == obj2) {
+    print("Equal!")
+}</code></pre>
+          <p>
+            Mutable and immutable arrays compare differently. 
+            Object property order doesn't matter for equality.
+          </p>
+        </section>
+
+        <section class="content-block" id="iteration">
+          <h2>Iteration</h2>
+          <p>
+            Use <code>for-in</code> loops to iterate over arrays and objects:
+          </p>
+          <h3>Array Iteration</h3>
+          <pre><code>set items = [10, 20, 30]
+for item in items {
+    print(item)
+}</code></pre>
+          <h3>Object Iteration</h3>
+          <pre><code>set user = { name: "Kria", age: 5 }
+for key, value in user {
+    print(key)
+    print(value)
+}</code></pre>
+          <p>
+            Arrays provide individual elements; objects provide both key and value.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/layout.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

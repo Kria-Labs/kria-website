@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn modules and imports in Kria.">
+  <title>Modules & Imports — Kria Documentation</title>
+  <link rel="icon" href="../assets/kria-ico.png" type="image/png">
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <script src="../js/config.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body data-page="docs">
+  <main id="main-content">
+    <header class="page-header">
+      <h1>Modules & Imports</h1>
+      <p class="lead">Build multi-file projects with exports and imports.</p>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-sidebar" aria-label="Modules sections">
+        <nav>
+          <ul>
+            <li><a href="../docs.html">← Back to Docs</a></li>
+            <li class="section-title">This Page</li>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#export">export fn</a></li>
+            <li><a href="#import">import Statement</a></li>
+            <li><a href="#relative-paths">Relative Paths</a></li>
+            <li><a href="#best-practices">Best Practices</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="docs-main">
+        <section class="content-block" id="overview">
+          <h2>Module System</h2>
+          <p>
+            Kria supports multi-file projects where modules can be imported and used. 
+            Each file is a module, and only explicitly exported functions are accessible to importers.
+          </p>
+          <p>
+            To run a multi-file project, you provide the main entry file:
+          </p>
+          <pre><code>kria main.krx</code></pre>
+          <p>
+            The main file can import other modules. 
+            Only the main entry file is compiled and executed; imports are resolved relative to it.
+          </p>
+        </section>
+
+        <section class="content-block" id="export">
+          <h2>Exporting Functions</h2>
+          <p>
+            Use <code>export fn</code> to make a function visible to importers:
+          </p>
+          <pre><code>// math.krx
+export fn add(a, b) {
+    return a + b
+}
+
+export fn mul(a, b) {
+    return a * b
+}
+
+fn secret() {
+    return 0
+}</code></pre>
+          <p>
+            Only exported functions are visible. 
+            Functions without <code>export</code> are private to the module.
+          </p>
+        </section>
+
+        <section class="content-block" id="import">
+          <h2>Importing Modules</h2>
+          <p>
+            Import a module with <code>import alias from "./path"</code>:
+          </p>
+          <pre><code>// main.krx
+import math from "./math.krx"
+
+print(math.add(2, 3))
+print(math.mul(4, 5))</code></pre>
+          <p>
+            The alias becomes a namespace containing all exported functions from that module. 
+            Call exported functions via the alias.
+          </p>
+        </section>
+
+        <section class="content-block" id="relative-paths">
+          <h2>Relative Paths</h2>
+          <p>
+            Import paths must be relative and use forward slashes:
+          </p>
+          <ul>
+            <li><code>./filename.krx</code> — Import from same directory</li>
+            <li><code>../sibling.krx</code> — Import from parent directory</li>
+            <li><code>./subdir/module.krx</code> — Import from subdirectory</li>
+          </ul>
+          <p>
+            Paths are resolved relative to the file doing the importing.
+          </p>
+          <h3>Project Structure Example</h3>
+          <pre><code>project/
+├── main.krx
+├── math/
+│   └── operations.krx
+└── utils/
+    └── helpers.krx</code></pre>
+          <p>
+            In <code>main.krx</code>:
+          </p>
+          <pre><code>import math from "./math/operations.krx"
+import utils from "./utils/helpers.krx"</code></pre>
+        </section>
+
+        <section class="content-block" id="best-practices">
+          <h2>Best Practices</h2>
+          <ul>
+            <li><strong>Clear naming</strong> — Use descriptive names for imports and modules</li>
+            <li><strong>Logical organization</strong> — Group related functions in modules</li>
+            <li><strong>Avoid circular imports</strong> — They are detected and rejected at compile time</li>
+            <li><strong>Keep modules focused</strong> — Each module should have a single responsibility</li>
+            <li><strong>Document exports</strong> — Add comments explaining exported functions</li>
+          </ul>
+          <p>
+            Kria's package manager (KPM) is planned for the future, 
+            which will add registry-based packages on top of file imports.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/layout.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

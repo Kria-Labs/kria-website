@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kria built-in functions reference.">
+  <title>Built-in Functions — Kria Documentation</title>
+  <link rel="icon" href="../assets/kria-ico.png" type="image/png">
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <script src="../js/config.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body data-page="docs">
+  <main id="main-content">
+    <header class="page-header">
+      <h1>Built-in Functions</h1>
+      <p class="lead">Reference for all built-in functions and their usage.</p>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-sidebar" aria-label="Built-in Functions sections">
+        <nav>
+          <ul>
+            <li><a href="../docs.html">← Back to Docs</a></li>
+            <li class="section-title">This Page</li>
+            <li><a href="#io">Input / Output</a></li>
+            <li><a href="#type-check">Type Checking</a></li>
+            <li><a href="#timing">Timing</a></li>
+            <li><a href="#arrays">Array Operations</a></li>
+            <li><a href="#objects">Object Operations</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="docs-main">
+        <section class="content-block" id="io">
+          <h2>Input / Output Functions</h2>
+          
+          <h3>print(value)</h3>
+          <p>Output a value to stdout followed by a newline.</p>
+          <pre><code>print("Hello, World!")
+print(42)
+print([1, 2, 3])</code></pre>
+          <p>Returns <code>null</code>. Accepts any value.</p>
+
+          <h3>input&lt;str&gt;(prompt)</h3>
+          <p>Read a string from the user with an optional prompt.</p>
+          <pre><code>set name = input<str>("Enter name: ")
+print(name)</code></pre>
+          <p>Returns the input string without trailing newline.</p>
+
+          <h3>input&lt;int&gt;(prompt)</h3>
+          <p>Read an integer from the user with an optional prompt.</p>
+          <pre><code>set age = input<int>("Age: ")
+print(age + 1)</code></pre>
+          <p>Returns the input as a number. Errors if input is not numeric.</p>
+
+          <h3>input&lt;float&gt;(prompt)</h3>
+          <p>Read a decimal number from the user with an optional prompt.</p>
+          <pre><code>set price = input<float>("Price: ")
+print(price * 1.1)</code></pre>
+          <p>Returns the input as a floating-point number.</p>
+        </section>
+
+        <section class="content-block" id="type-check">
+          <h2>Type Checking</h2>
+          
+          <h3>type(value)</h3>
+          <p>Get the type of a value as a string.</p>
+          <pre><code>print(type(42))
+print(type("hello"))
+print(type(true))
+print(type(null))
+print(type([1, 2, 3]))
+print(type(#[1, 2]))
+print(type({ x: 1 }))
+print(type(fn(x) { return x }))</code></pre>
+          <p>
+            Returns one of: <code>"number"</code>, <code>"string"</code>, <code>"boolean"</code>, 
+            <code>"null"</code>, <code>"array"</code>, <code>"object"</code>, or <code>"function"</code>.
+          </p>
+        </section>
+
+        <section class="content-block" id="timing">
+          <h2>Timing Functions</h2>
+          
+          <h3>wait(milliseconds)</h3>
+          <p>Pause execution for a specified number of milliseconds.</p>
+          <pre><code>print("Starting pause...")
+wait(500)
+print("Done (half a second later)")</code></pre>
+          <p>
+            Useful for delays, animations, or rate-limiting. 
+            Returns <code>null</code>.
+          </p>
+          <h3>Example: Timed Loop</h3>
+          <pre><code>set i = 0
+while (i < 3) {
+    print(i)
+    wait(200)
+    set i = i + 1
+}</code></pre>
+        </section>
+
+        <section class="content-block" id="arrays">
+          <h2>Array Operations</h2>
+          
+          <h3>push(array, value)</h3>
+          <p>Add an element to the end of a mutable array.</p>
+          <pre><code>set arr = [1, 2, 3]
+push(arr, 4)
+print(arr)</code></pre>
+          <p>Modifies the array in place. Returns <code>null</code>.</p>
+
+          <h3>pop(array)</h3>
+          <p>Remove and return the last element of a mutable array.</p>
+          <pre><code>set arr = [1, 2, 3]
+set last = pop(arr)
+print(last)
+print(arr)</code></pre>
+          <p>Returns the removed element. Returns <code>null</code> for empty arrays.</p>
+
+          <h3>.length property</h3>
+          <p>Get the number of elements in an array.</p>
+          <pre><code>set arr = [10, 20, 30]
+print(arr.length)</code></pre>
+          <p>Works for both mutable and immutable arrays.</p>
+        </section>
+
+        <section class="content-block" id="objects">
+          <h2>Object Operations</h2>
+          
+          <h3>rmv(property)</h3>
+          <p>Delete a property from an object.</p>
+          <pre><code>set user = { name: "Kria", age: 5 }
+rmv(user.name)
+print(user.name)</code></pre>
+          <p>
+            After removal, the property returns <code>null</code>. 
+            Also works with bracket notation: <code>rmv(user["name"])</code>.
+          </p>
+        </section>
+
+        <section class="content-block" id="comments-strings">
+          <h2>Comments & Strings</h2>
+          
+          <h3>Single-line Comments</h3>
+          <pre><code>// This is a comment
+set x = 10  // Inline comment</code></pre>
+          <p>Everything after <code>//</code> on a line is ignored.</p>
+
+          <h3>Block Comments</h3>
+          <pre><code>/*
+  Multi-line comment
+  spans multiple lines
+*/
+print("visible")</code></pre>
+          <p>Nested block comments are not supported.</p>
+
+          <h3>Multi-line Strings</h3>
+          <pre><code>print("""Line one
+Line two
+Line three""")</code></pre>
+          <p>Use triple quotes <code>"""</code> for strings spanning multiple lines.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/layout.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

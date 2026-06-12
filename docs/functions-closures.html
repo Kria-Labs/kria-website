@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn functions and closures in Kria.">
+  <title>Functions & Closures — Kria Documentation</title>
+  <link rel="icon" href="../assets/kria-ico.png" type="image/png">
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <script src="../js/config.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body data-page="docs">
+  <main id="main-content">
+    <header class="page-header">
+      <h1>Functions & Closures</h1>
+      <p class="lead">Define, call, and compose functions with Kria.</p>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-sidebar" aria-label="Functions sections">
+        <nav>
+          <ul>
+            <li><a href="../docs.html">← Back to Docs</a></li>
+            <li class="section-title">This Page</li>
+            <li><a href="#named-functions">Named Functions</a></li>
+            <li><a href="#parameters-return">Parameters & Return</a></li>
+            <li><a href="#lambdas">Lambda Functions</a></li>
+            <li><a href="#closures">Closures</a></li>
+            <li><a href="#recursion">Recursion</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="docs-main">
+        <section class="content-block" id="named-functions">
+          <h2>Named Functions</h2>
+          <p>
+            Define a function with the <code>fn</code> keyword, followed by a name and parameters:
+          </p>
+          <pre><code>fn add(a, b) {
+    return a + b
+}
+
+fn greet(name) {
+    print("Hello, ")
+    print(name)
+}
+
+print(add(5, 3))
+greet("Kria")</code></pre>
+          <p>
+            Functions can have zero or more parameters. 
+            They are called by name with parentheses.
+          </p>
+        </section>
+
+        <section class="content-block" id="parameters-return">
+          <h2>Parameters & Return Values</h2>
+          <p>
+            Functions receive parameters and return values with the <code>return</code> keyword:
+          </p>
+          <pre><code>fn get_max(a, b) {
+    if (a > b) {
+        return a
+    } else {
+        return b
+    }
+}
+
+set max_val = get_max(15, 8)
+print(max_val)</code></pre>
+          <p>
+            A function can have multiple return statements. 
+            If no return is given, the function returns <code>null</code>.
+          </p>
+        </section>
+
+        <section class="content-block" id="lambdas">
+          <h2>Lambda Functions</h2>
+          <p>
+            Create anonymous functions inline using the same <code>fn</code> syntax:
+          </p>
+          <pre><code>set double = fn(x) {
+    return x * 2
+}
+
+print(double(10))
+
+set create_multiplier = fn(factor) {
+    return fn(x) {
+        return x * factor
+    }
+}
+
+set times_three = create_multiplier(3)
+print(times_three(7))</code></pre>
+          <p>
+            Lambdas can be assigned to variables or passed as arguments. 
+            They support nested definitions.
+          </p>
+        </section>
+
+        <section class="content-block" id="closures">
+          <h2>Closures</h2>
+          <p>
+            Functions can capture variables from their enclosing scope (closure). 
+            Captured values are copied when the function is created (copy-on-create semantics):
+          </p>
+          <pre><code>fn create_counter() {
+    set count = 0
+    return fn() {
+        set count = count + 1
+        return count
+    }
+}
+
+set counter = create_counter()
+print(counter())
+print(counter())</code></pre>
+          <p>
+            Each function has its own copy of captured variables, 
+            so they don't interfere with each other.
+          </p>
+        </section>
+
+        <section class="content-block" id="recursion">
+          <h2>Recursion</h2>
+          <p>
+            Functions can call themselves recursively:
+          </p>
+          <pre><code>fn factorial(n) {
+    if (n <= 1) {
+        return 1
+    } else {
+        set prev = n - 1
+        set prev_factorial = factorial(prev)
+        return n * prev_factorial
+    }
+}
+
+print(factorial(5))</code></pre>
+          <p>
+            Ensure your recursive function has a base case to prevent infinite recursion.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/layout.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

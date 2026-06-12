@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn input and output in Kria.">
+  <title>Input / Output — Kria Documentation</title>
+  <link rel="icon" href="../assets/kria-ico.png" type="image/png">
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <script src="../js/config.js"></script>
+  <script src="../js/theme.js"></script>
+</head>
+<body data-page="docs">
+  <main id="main-content">
+    <header class="page-header">
+      <h1>Input / Output</h1>
+      <p class="lead">Print output and read user input with type-specific functions.</p>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-sidebar" aria-label="Input/Output sections">
+        <nav>
+          <ul>
+            <li><a href="../docs.html">← Back to Docs</a></li>
+            <li class="section-title">This Page</li>
+            <li><a href="#print">print()</a></li>
+            <li><a href="#input-str">input&lt;str&gt;</a></li>
+            <li><a href="#input-int">input&lt;int&gt;</a></li>
+            <li><a href="#input-float">input&lt;float&gt;</a></li>
+            <li><a href="#interactive">Interactive Programs</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="docs-main">
+        <section class="content-block" id="print">
+          <h2>Printing Output</h2>
+          <p>
+            Use <code>print()</code> to write values to standard output:
+          </p>
+          <pre><code>print("Hello, World!")
+print(42)
+print(true)
+print(null)</code></pre>
+          <p>
+            <code>print()</code> accepts any value and outputs it followed by a newline. 
+            In the REPL, expressions are auto-printed unless assigned to variables.
+          </p>
+          <h3>Printing Multiple Values</h3>
+          <pre><code>set x = 10
+set y = 20
+print("Sum: ")
+print(x + y)</code></pre>
+          <p>
+            Each <code>print()</code> call is on its own line. 
+            Use string concatenation to combine values on one line.
+          </p>
+        </section>
+
+        <section class="content-block" id="input-str">
+          <h2>String Input</h2>
+          <p>
+            Read a string from the user with <code>input&lt;str&gt;(prompt)</code>:
+          </p>
+          <pre><code>set name = input<str>("What is your name?")
+print("Hello, ")
+print(name)
+
+set color = input<str>("Your favorite color?")
+print("You like: ")
+print(color)</code></pre>
+          <p>
+            The prompt is displayed and the user's input is read as a string. 
+            Trailing newlines are removed.
+          </p>
+        </section>
+
+        <section class="content-block" id="input-int">
+          <h2>Integer Input</h2>
+          <p>
+            Read an integer with <code>input&lt;int&gt;(prompt)</code>:
+          </p>
+          <pre><code>set number = input<int>("Enter an integer:")
+print("Number you entered: ")
+print(number)
+
+set a = input<int>("First number:")
+set b = input<int>("Second number:")
+print("Sum: ")
+print(a + b)</code></pre>
+          <p>
+            The input is parsed as an integer. 
+            If the user enters non-numeric input, an error occurs.
+          </p>
+        </section>
+
+        <section class="content-block" id="input-float">
+          <h2>Float Input</h2>
+          <p>
+            Read a decimal number with <code>input&lt;float&gt;(prompt)</code>:
+          </p>
+          <pre><code>set float_num = input<float>("Enter a decimal:")
+print("You entered: ")
+print(float_num)
+
+set x = input<float>("First decimal:")
+set y = input<float>("Second decimal:")
+print("Sum: ")
+print(x + y)</code></pre>
+          <p>
+            The input is parsed as a floating-point number. 
+            Supports decimal notation.
+          </p>
+        </section>
+
+        <section class="content-block" id="interactive">
+          <h2>Interactive Programs</h2>
+          <p>
+            Combine input and output to create interactive programs:
+          </p>
+          <pre><code>print("--- Simple Calculator ---")
+set num1 = input<int>("First number:")
+set num2 = input<int>("Second number:")
+
+set sum = num1 + num2
+print("Sum: ")
+print(sum)
+
+print("--- Age Categorization ---")
+set age = input<int>("Your age:")
+
+if (age < 13) {
+    print("Child")
+} else {
+    if (age < 18) {
+        print("Teenager")
+    } else {
+        print("Adult")
+    }
+}</code></pre>
+          <p>
+            Programs can prompt for multiple inputs and branch based on user responses. 
+            Use loops to repeat interactions.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/layout.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
