@@ -29,25 +29,6 @@
     </section>
 
     <section class="section">
-      <h2 class="section-title">How it works</h2>
-      <div class="pipeline">
-        <span class="pipeline-step">Source</span>
-        <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
-        <span class="pipeline-step">Lexer</span>
-        <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
-        <span class="pipeline-step">Parser</span>
-        <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
-        <span class="pipeline-step">Compiler</span>
-        <span class="pipeline-arrow" aria-hidden="true">&rarr;</span>
-        <span class="pipeline-step">VM</span>
-      </div>
-      <p style="margin-top: 1rem; color: var(--color-text-muted); font-size: 0.9375rem;">
-        Kria compiles source into flat bytecode with a constant pool, then runs it on a
-        stack-based VM with call frames for functions and closures.
-      </p>
-    </section>
-
-    <section class="section">
       <h2 class="section-title">Features</h2>
       <div class="card-grid feature-grid">
         <article class="card">
@@ -66,14 +47,6 @@
           <h3>Modules</h3>
           <p>Multi-file projects with <code>export fn</code> and <code>import alias from "./file.krx"</code>.</p>
         </article>
-        <article class="card">
-          <h3>Performance</h3>
-          <p>Combined loop opcodes like <code>OP_LOOP_INC_LESS</code> reduce hot-path dispatch overhead.</p>
-        </article>
-        <article class="card">
-          <h3>Dynamic Typing</h3>
-          <p>Strong, dynamic types with null for undefined variables. Newline-based statements, no semicolons.</p>
-        </article>
       </div>
     </section>
 
@@ -87,9 +60,107 @@ set message = greet("Kria")
 print(message)</code></pre>
       <a href="docs.html" class="btn btn-secondary">Explore documentation</a>
     </section>
+
+    <section class="content-block">
+      <h2>Download & Installation</h2>
+      <p>Get started with Kria in just a few steps. You can build from source with Rust or use platform-specific installation scripts.</p>
+    </section>
+
+    <section class="content-block">
+      <h2>Prerequisites</h2>
+      <p>Before building Kria, make sure you have the <a href="https://www.rust-lang.org/tools/install" target="_blank" rel="noopener noreferrer">Rust toolchain</a> installed on your system. If you don't have Rust yet, visit the official installer.</p>
+    </section>
+
+    <section class="content-block">
+      <h2>Build from source</h2>
+      <h3>1. Development build</h3>
+      <pre><code>cargo build</code></pre>
+      <p>This creates a debug build. Useful for development and testing.</p>
+      
+      <h3>2. Release build (recommended)</h3>
+      <pre><code>cargo build --release</code></pre>
+      <p>This creates an optimized release binary. The binary is located at <code>target/release/kria</code>.</p>
+      
+      <h3>3. Install to your system</h3>
+      <p><strong>For Linux / macOS:</strong></p>
+      <pre><code>cd release
+./build.sh install</code></pre>
+      <p>This installs Kria to <code>~/.kria/bin</code>. Make sure this directory is in your PATH.</p>
+    </section>
+
+    <section class="content-block">
+      <h2>Run Kria</h2>
+      <h3>Interactive REPL</h3>
+      <pre><code>kria</code></pre>
+      <p>Starts the interactive REPL where you can write and execute Kria code. Variables and functions persist until you exit or reset.</p>
+      
+      <p><strong>REPL commands:</strong></p>
+      <ul>
+        <li><code>:help</code> — Show available commands</li>
+        <li><code>:quit</code> or <code>:exit</code> — Exit the REPL</li>
+        <li><code>:reset</code> — Clear all variables and functions</li>
+      </ul>
+      
+      <h3>Check version</h3>
+      <pre><code>kria -v
+# or
+kria --version</code></pre>
+
+      <h3>Run a source file</h3>
+      <pre><code>kria test.krx</code></pre>
+      <p>Execute a Kria program from a <code>.krx</code> file.</p>
+    </section>
+
+    <section class="content-block">
+      <h2>Platform-specific installation</h2>
+      <div class="platform-grid">
+        <div class="platform-card">
+          <h3>Windows</h3>
+          <p>To create an installer, you'll need <a href="https://nsis.sourceforge.io/" target="_blank" rel="noopener noreferrer">NSIS</a>.</p>
+          <pre><code>cargo build --release
+cd release
+makensis kria-setup.nsi
+# Then run the installer
+release\kria-1.0.0-windows-x86_64-setup.exe</code></pre>
+        </div>
+        <div class="platform-card">
+          <h3>Linux / macOS</h3>
+          <p>Install to <code>~/.kria/bin</code> (make sure it's in your PATH).</p>
+          <pre><code>cd release
+./build.sh install</code></pre>
+          <p><strong>Create a distributable archive:</strong></p>
+          <pre><code>./build.sh package</code></pre>
+          <p>Creates <code>kria-&lt;version&gt;-&lt;os&gt;-&lt;arch&gt;.tar.gz</code></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-block">
+      <h2>VS Code extension</h2>
+      <p>Enhance your Kria development experience with the official VS Code extension. Get syntax highlighting, code completion, and go-to-definition support.</p>
+      <p>
+        <a id="vscode-download-link" href="#">Install the Kria VS Code extension</a>
+      </p>
+    </section>
+
+    <section class="content-block fade-in">
+      <h2>What's next?</h2>
+      <p>Once you've installed Kria, try running a simple script:</p>
+      <pre><code>kria test.krx</code></pre>
+      <p>Check out the full source code and releases on <a id="github-download-link" href="#">GitHub</a>, or dive into the <a href="docs.html">documentation</a> to learn the language.</p>
+    </section>
   </main>
 
   <script src="js/layout.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    (function () {
+      if (typeof KRIA_LINKS === "undefined") return;
+      var lang = document.getElementById("github-download-link");
+      var vscode = document.getElementById("vscode-download-link");
+      if (lang) lang.href = KRIA_LINKS.lang;
+      if (vscode) vscode.href = KRIA_LINKS.vscode;
+    })();
+  </script>
 </body>
 </html>

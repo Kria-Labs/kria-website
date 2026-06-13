@@ -14,7 +14,6 @@
     { href: "/index.html", label: "Home", id: "index" },
     { href: "/docs.html", label: "Docs", id: "docs" },
     { href: "/playground.html", label: "Playground", id: "playground" },
-    { href: "/download.html", label: "Download", id: "download" },
     { href: "/kpm.html", label: "KPM", id: "kpm" },
     { href: "/about.html", label: "About", id: "about" },
   ];
