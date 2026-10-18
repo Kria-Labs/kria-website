@@ -17,6 +17,8 @@ Live: [krialang.vercel.app](https://krialang.vercel.app)
 | `kpm.html` | Kria Package Manager page |
 | `about.html` | About Kria Labs |
 
+Download ready-to-use Kria releases from [GitHub Releases](https://github.com/Kria-Labs/kria-lang/releases); building from source is optional.
+
 ## Links
 
 Configured in `js/config.js`:

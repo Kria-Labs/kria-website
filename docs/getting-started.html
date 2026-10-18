@@ -36,18 +36,35 @@
 
       <div class="docs-main">
         <section class="content-block" id="prerequisites">
-          <h2>Prerequisites</h2>
+          <h2>Build prerequisites</h2>
           <p>
-            To build Kria from source, you need the <strong>Rust toolchain</strong>. Kria is
-            built using the Rust 2021 edition.
-            Install Rust using <a href="https://rustup.rs/" target="_blank">rustup</a>.
+            The <a href="https://github.com/Kria-Labs/kria-lang/releases" target="_blank" rel="noopener noreferrer">GitHub Releases page</a>
+            provides ready-to-use builds when available. At the time this page was checked,
+            the latest published release was 1.2.0 and included a Windows installer; no
+            prebuilt Linux/macOS binary was listed. Check the release assets and notes
+            for current availability. If a suitable build is available for your platform,
+            you do not need to install Rust or compile the source. The source repository
+            is at version 1.3.0, so its features may differ from the published release.
+          </p>
+          <p>
+            To build Kria yourself, you need the <strong>Rust toolchain</strong>. Kria is
+            built using the Rust 2021 edition. Install Rust using
+            <a href="https://rustup.rs/" target="_blank" rel="noopener noreferrer">rustup</a>.
           </p>
           <pre><code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code></pre>
         </section>
 
         <section class="content-block" id="installation">
-          <h2>Installation</h2>
-          <p>Clone the repository and build Kria in release mode:</p>
+          <h2>Download or build Kria</h2>
+          <h3>Download a release (recommended)</h3>
+          <p>
+            Open <a href="https://github.com/Kria-Labs/kria-lang/releases" target="_blank" rel="noopener noreferrer">Kria on GitHub Releases</a>,
+            choose a published release, and download an asset suitable for your
+            operating system and architecture. Follow that release's notes to install
+            or run it.
+          </p>
+          <h3>Build from source</h3>
+          <p>If you prefer to build Kria yourself, clone the repository and build in release mode:</p>
           <pre><code>git clone https://github.com/Kria-Labs/kria-lang.git
 cd kria-lang
 cargo build --release</code></pre>
@@ -65,10 +82,10 @@ set y = 3
 print(x + y)</code></pre>
           <p>Run it with:</p>
           <pre><code># Linux / macOS
-./target/release/kria hello.krx
+kria hello.krx
 
 # Windows PowerShell
-.\target\release\kria.exe .\hello.krx</code></pre>
+.\kria.exe .\hello.krx</code></pre>
           <p>Output: <code>8</code></p>
         </section>
 
@@ -77,7 +94,7 @@ print(x + y)</code></pre>
           <p>
             Start the interactive Read-Eval-Print Loop with no arguments:
           </p>
-          <pre><code>./target/release/kria</code></pre>
+          <pre><code>kria</code></pre>
           <p>
             The REPL provides a persistent session where variables and functions stay in scope 
             until you reset or exit.
@@ -97,9 +114,7 @@ greet(name)</code></pre>
 
         <section class="content-block" id="next-steps">
           <h2>Next Steps</h2>
-          <p>
-            Now that you have Kria running, explore the other documentation sections:
-          </p>
+          <p>Once you have downloaded or built Kria, explore the other documentation sections:</p>
           <ul>
             <li><a href="language-basics.html">Language Basics</a> — Learn about variables, types, and operators</li>
             <li><a href="control-flow.html">Control Flow</a> — Master if/else, loops, and jumps</li>

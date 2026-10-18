@@ -23,8 +23,8 @@
         persistent interactive REPL. Write <code>.krx</code> files or explore the language.
       </p>
       <div class="hero-actions">
-        <a href="docs.html" class="btn btn-primary">Read the docs</a>
-        <a href="docs/getting-started.html" class="btn btn-secondary">Get started</a>
+        <a href="https://github.com/Kria-Labs/kria-lang/releases" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Download Kria</a>
+        <a href="docs.html" class="btn btn-secondary">Read the docs</a>
       </div>
     </section>
 
@@ -66,17 +66,27 @@ print(message)</code></pre>
     </section>
 
     <section class="content-block">
-      <h2>Download & Installation</h2>
-      <p>Build Kria from source with Rust, or use the platform-specific installer instructions in the language repository.</p>
+      <h2>Download a ready-to-use build</h2>
+      <p>
+        Visit the <a href="https://github.com/Kria-Labs/kria-lang/releases" target="_blank" rel="noopener noreferrer">Kria releases page</a>
+        to download published builds. At the time this page was checked, the latest
+        published release was 1.2.0 and included a Windows installer; a prebuilt
+        Linux/macOS binary was not listed. Check the release assets and notes for the
+        latest platform availability. The source repository is at version 1.3.0, so
+        features in the published installer may differ from the current source.
+      </p>
+      <p>
+        <a href="https://github.com/Kria-Labs/kria-lang/releases" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Download from GitHub Releases</a>
+      </p>
     </section>
 
     <section class="content-block">
-      <h2>Prerequisites</h2>
-      <p>Before building Kria, install the <a href="https://www.rust-lang.org/tools/install" target="_blank" rel="noopener noreferrer">Rust toolchain</a>. The Kria project uses the Rust 2021 edition.</p>
-    </section>
-
-    <section class="content-block">
-      <h2>Build from source</h2>
+      <h2>Build from source (optional)</h2>
+      <p>
+        Choose this route only if you want to build Kria yourself. You will need the
+        <a href="https://www.rust-lang.org/tools/install" target="_blank" rel="noopener noreferrer">Rust toolchain</a>;
+        the Kria project uses the Rust 2021 edition.
+      </p>
       <h3>1. Development build</h3>
       <pre><code>cargo build</code></pre>
       <p>This creates a debug build. Useful for development and testing.</p>
@@ -115,20 +125,29 @@ kria --version</code></pre>
     </section>
 
     <section class="content-block">
-      <h2>Platform-specific installation</h2>
+      <h2>Platform-specific build and packaging</h2>
       <div class="platform-grid">
         <div class="platform-card">
           <h3>Windows</h3>
-          <p>To create an installer, you'll need <a href="https://nsis.sourceforge.io/" target="_blank" rel="noopener noreferrer">NSIS</a>.</p>
+          <p>
+            A Windows installer is available from the
+            <a href="https://github.com/Kria-Labs/kria-lang/releases" target="_blank" rel="noopener noreferrer">GitHub Releases</a>
+            page (check for newer assets). To create an installer from source, install
+            <a href="https://nsis.sourceforge.io/" target="_blank" rel="noopener noreferrer">NSIS</a>.
+          </p>
           <pre><code>cargo build --release
 cd release
 makensis kria-setup.nsi
-# Then run the installer
-kria-1.3.0-windows-x86_64-setup.exe</code></pre>
+# Run the generated installer from release/</code></pre>
         </div>
         <div class="platform-card">
           <h3>Linux / macOS</h3>
-          <p>Build and install to <code>~/.kria/bin</code> (make sure it's in your PATH).</p>
+          <p>
+            Check <a href="https://github.com/Kria-Labs/kria-lang/releases" target="_blank" rel="noopener noreferrer">GitHub Releases</a>
+            for newer Linux/macOS binaries. No prebuilt Linux/macOS binary was listed
+            when this page was checked, so use the source build to install to
+            <code>~/.kria/bin</code>:
+          </p>
           <pre><code>cd release
 ./build.sh install</code></pre>
           <p><strong>Create a distributable archive:</strong></p>
@@ -148,7 +167,7 @@ kria-1.3.0-windows-x86_64-setup.exe</code></pre>
 
     <section class="content-block fade-in">
       <h2>What's next?</h2>
-      <p>Once you've built or installed Kria, try running a simple script:</p>
+      <p>Once you have downloaded or built Kria, try running a simple script:</p>
       <pre><code>kria test.krx</code></pre>
       <p>Check out the full source code and releases on <a id="github-download-link" href="#">GitHub</a>, or dive into the <a href="docs.html">documentation</a> to learn the language.</p>
     </section>
