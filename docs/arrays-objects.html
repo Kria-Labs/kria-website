@@ -107,7 +107,10 @@ print(user.name)</code></pre>
         <section class="content-block" id="equality">
           <h2>Deep Equality</h2>
           <p>
-            Arrays and objects are compared by value, not reference:
+            Arrays and objects are compared by value, not reference. Array contents
+            and order are compared; mutable and immutable arrays with the same elements
+            compare equal. Object key/value contents are compared regardless of property
+            insertion order:
           </p>
           <pre><code>set a = [1, 2]
 set b = [1, 2]
@@ -120,10 +123,7 @@ set obj2 = { y: 2, x: 1 }
 if (obj1 == obj2) {
     print("Equal!")
 }</code></pre>
-          <p>
-            Mutable and immutable arrays compare differently. 
-            Object property order doesn't matter for equality.
-          </p>
+          <p>Object property order does not affect equality.</p>
         </section>
 
         <section class="content-block" id="iteration">

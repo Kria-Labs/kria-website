@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Kria Playground — Interactive web-based Kria interpreter.">
+  <meta name="description" content="Kria Playground — browser-based editor preview; code execution is not available.">
   <title>Playground — Kria</title>
   <link rel="icon" href="assets/kria-ico.png" type="image/png">
   <link rel="stylesheet" href="css/theme.css">
@@ -253,7 +253,7 @@
   <main id="main-content">
     <div class="playground-toolbar">
       <div class="playground-toolbar-left" id="file-tabs"></div>
-      <button class="run-button" id="run-button">▶ Run</button>
+      <button class="run-button" id="run-button">▶ Run (runtime unavailable)</button>
     </div>
 
     <div class="playground-container">
@@ -266,7 +266,7 @@
 
       <div class="output-pane">
         <div class="output-header">Output</div>
-        <div class="output-content empty" id="output">Run your code to see output...</div>
+        <div class="output-content empty" id="output">This editor is a preview only. The Kria WebAssembly runtime is not connected, so code is not executed.</div>
       </div>
     </div>
   </main>
@@ -282,26 +282,22 @@
 
 set message = greet("Kria")
 print(message)`,
-      'example1.krx': `# Example: Counter
+      'example1.krx': `// Example: Counter
 set counter = 0
 set max = 5
 
-loop {
+while (counter < max) {
     print(counter)
     set counter = counter + 1
-    if counter >= max {
-        break
-    }
 }`,
-      'example2.krx': `# Example: Array Operations
+      'example2.krx': `// Example: Array Operations
 set numbers = [1, 2, 3, 4, 5]
-set doubled = []
 
 for num in numbers {
-    set doubled = doubled + [num * 2]
+    print(num * 2)
 }
 
-print(doubled)`
+`
     };
 
     let currentFile = 'main.krx';
@@ -364,7 +360,7 @@ print(doubled)`
         currentFile = fileName;
         editor.value = files[fileName];
         updateLineNumbers();
-        output.textContent = 'Run your code to see output...';
+        output.textContent = 'This editor is a preview only. The Kria WebAssembly runtime is not connected, so code is not executed.';
         output.classList.add('empty');
         renderTabs();
       }
@@ -387,14 +383,14 @@ print(doubled)`
     function createNewFile() {
       customFileCount++;
       const newFileName = `file${customFileCount}.krx`;
-      files[newFileName] = '# New file\nprint("Start coding here!")';
+      files[newFileName] = '// New file\nprint("Start coding here!")';
       loadFile(newFileName);
     }
 
     // Handle run button
     runButton.addEventListener('click', () => {
       output.classList.remove('empty');
-      output.textContent = 'Output would appear here.\n(Kria WebAssembly runtime coming soon...)\n\nCode from ' + currentFile + ':\n' + editor.value;
+      output.textContent = 'The Kria WebAssembly runtime is not connected yet. This editor does not execute code.\n\nSave your code as a .krx file, then build Kria and run:\nkria ' + currentFile;
     });
 
     // Handle tab indentation in editor

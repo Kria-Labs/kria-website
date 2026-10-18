@@ -47,20 +47,21 @@ set y = 20
 set sum = x + y
 print(sum)</code></pre>
           <p>
-            Variables persist during a session (in the REPL) or throughout a program. 
-            There are no special constants or immutable bindings.
+            Variables persist during a session (in the REPL) or throughout a program.
+            Kria is dynamically typed: values have runtime types, and bindings do not
+            declare a fixed type.
           </p>
         </section>
 
         <section class="content-block" id="types">
           <h2>Data Types</h2>
-          <p>Kria has 7 primitive types:</p>
+          <p><code>type(value)</code> reports one of these runtime categories:</p>
           <ul>
-            <li><strong>Number</strong> — Integers and floats (unified as "number")</li>
+            <li><strong>Number</strong> — Signed 64-bit integers and double-precision floats; both report as <code>"number"</code></li>
             <li><strong>String</strong> — Text values with double quotes</li>
             <li><strong>Boolean</strong> — <code>true</code> or <code>false</code></li>
-            <li><strong>Null</strong> — Represents undefined values</li>
-            <li><strong>Array</strong> — Mutable ordered collections</li>
+            <li><strong>Null</strong> — The explicit <code>null</code> value</li>
+            <li><strong>Array</strong> — Ordered, mutable or immutable collections</li>
             <li><strong>Object</strong> — Key-value pairs</li>
             <li><strong>Function</strong> — First-class functions and closures</li>
           </ul>
@@ -69,6 +70,17 @@ print(sum)</code></pre>
 set isActive = true
 set value = null
 print(name)</code></pre>
+          <h3>Integers and floats</h3>
+          <p>
+            Integer and decimal/scientific-notation literals are supported. Integer-only
+            division remains integer division; arithmetic mixing an integer and a float
+            produces a float.
+          </p>
+          <pre><code>set whole = 7
+set decimal = 2.5
+set scientific = 1.2e3
+print(whole / 2)
+print(whole + decimal)</code></pre>
         </section>
 
         <section class="content-block" id="operators">
@@ -100,9 +112,14 @@ print(name)</code></pre>
             <tr>
               <td><code>/</code></td>
               <td>Division</td>
-              <td><code>10 / 2 = 5</code></td>
+              <td><code>7 / 2 = 3</code> (integer division)</td>
             </tr>
           </table>
+          <p>
+            A calculation involving a float produces a floating-point result; for example,
+            <code>7 / 2.0</code> evaluates to <code>3.5</code>. The <code>+</code> operator
+            also concatenates two strings. Dividing by zero is an error.
+          </p>
           <h3>Example</h3>
           <pre><code>set x = 10
 set product = x * 20
@@ -171,9 +188,17 @@ print(quotient)</code></pre>
           <h3>Example</h3>
           <pre><code>set x = 10
 set y = 20
-if (x < y and y > 15) {
-    print("Both conditions true")
+          if (x < y) {
+              print("x is less than y")
 }</code></pre>
+          <p>
+            Conditions must evaluate to booleans. Kria does not convert other values
+            implicitly to true or false. The <code>and</code> and <code>or</code>
+            operators accept boolean operands. A current file-compilation limitation
+            can cause non-constant <code>and</code>/<code>or</code> expressions to fail
+            during compilation; avoid variable-based logical expressions in
+            <code>.krx</code> files until this is fixed.
+          </p>
         </section>
 
         <section class="content-block" id="type-checking">
@@ -186,7 +211,7 @@ print(type("hello"))
 print(type(true))
 print(type(null))</code></pre>
           <p>
-            Returns one of: <code>"number"</code>, <code>"string"</code>, <code>"boolean"</code>, 
+            Returns one of: <code>"number"</code>, <code>"string"</code>, <code>"boolean"</code>,
             <code>"null"</code>, <code>"array"</code>, <code>"object"</code>, or <code>"function"</code>.
           </p>
         </section>

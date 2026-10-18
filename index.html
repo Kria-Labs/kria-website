@@ -18,13 +18,13 @@
       <span class="hero-badge">Kria &middot; krx </span>
       <h1>Kria Programming Language</h1>
       <p class="lead">
-        A dynamic, strongly typed language with a flat bytecode VM and combined loop
-        instructions for high-performance execution. Write <code>.krx</code> files or use the
-        interactive REPL.
+        A dynamically typed language implemented in Rust, with a bytecode virtual machine.
+        It supports 64-bit integers and double-precision floats, functions, closures, and a
+        persistent interactive REPL. Write <code>.krx</code> files or explore the language.
       </p>
       <div class="hero-actions">
         <a href="docs.html" class="btn btn-primary">Read the docs</a>
-        <a href="download.html" class="btn btn-secondary">Download</a>
+        <a href="docs/getting-started.html" class="btn btn-secondary">Get started</a>
       </div>
     </section>
 
@@ -32,12 +32,16 @@
       <h2 class="section-title">Features</h2>
       <div class="card-grid feature-grid">
         <article class="card">
+          <h3>Dynamic Numeric Types</h3>
+          <p>Use 64-bit integers and double-precision floats, including decimal and scientific-notation literals.</p>
+        </article>
+        <article class="card">
           <h3>Interactive REPL</h3>
           <p>Run <code>kria</code> with no arguments. Persistent session, multi-line input, and command history.</p>
         </article>
         <article class="card">
           <h3>Functions &amp; Closures</h3>
-          <p>Named functions, lambdas, and nested closures with copy-on-create capture semantics.</p>
+          <p>Named functions, lambdas, and nested closures that can retain and update captured values.</p>
         </article>
         <article class="card">
           <h3>Arrays &amp; Objects</h3>
@@ -63,12 +67,12 @@ print(message)</code></pre>
 
     <section class="content-block">
       <h2>Download & Installation</h2>
-      <p>Get started with Kria in just a few steps. You can build from source with Rust or use platform-specific installation scripts.</p>
+      <p>Build Kria from source with Rust, or use the platform-specific installer instructions in the language repository.</p>
     </section>
 
     <section class="content-block">
       <h2>Prerequisites</h2>
-      <p>Before building Kria, make sure you have the <a href="https://www.rust-lang.org/tools/install" target="_blank" rel="noopener noreferrer">Rust toolchain</a> installed on your system. If you don't have Rust yet, visit the official installer.</p>
+      <p>Before building Kria, install the <a href="https://www.rust-lang.org/tools/install" target="_blank" rel="noopener noreferrer">Rust toolchain</a>. The Kria project uses the Rust 2021 edition.</p>
     </section>
 
     <section class="content-block">
@@ -83,9 +87,8 @@ print(message)</code></pre>
       
       <h3>3. Install to your system</h3>
       <p><strong>For Linux / macOS:</strong></p>
-      <pre><code>cd release
-./build.sh install</code></pre>
-      <p>This installs Kria to <code>~/.kria/bin</code>. Make sure this directory is in your PATH.</p>
+      <pre><code>./release/build.sh install</code></pre>
+      <p>This builds Kria and installs it to <code>~/.kria/bin</code>. Make sure this directory is in your PATH.</p>
     </section>
 
     <section class="content-block">
@@ -121,11 +124,11 @@ kria --version</code></pre>
 cd release
 makensis kria-setup.nsi
 # Then run the installer
-release\kria-1.0.0-windows-x86_64-setup.exe</code></pre>
+kria-1.3.0-windows-x86_64-setup.exe</code></pre>
         </div>
         <div class="platform-card">
           <h3>Linux / macOS</h3>
-          <p>Install to <code>~/.kria/bin</code> (make sure it's in your PATH).</p>
+          <p>Build and install to <code>~/.kria/bin</code> (make sure it's in your PATH).</p>
           <pre><code>cd release
 ./build.sh install</code></pre>
           <p><strong>Create a distributable archive:</strong></p>
@@ -145,7 +148,7 @@ release\kria-1.0.0-windows-x86_64-setup.exe</code></pre>
 
     <section class="content-block fade-in">
       <h2>What's next?</h2>
-      <p>Once you've installed Kria, try running a simple script:</p>
+      <p>Once you've built or installed Kria, try running a simple script:</p>
       <pre><code>kria test.krx</code></pre>
       <p>Check out the full source code and releases on <a id="github-download-link" href="#">GitHub</a>, or dive into the <a href="docs.html">documentation</a> to learn the language.</p>
     </section>

@@ -38,7 +38,8 @@
         <section class="content-block" id="prerequisites">
           <h2>Prerequisites</h2>
           <p>
-            To build Kria from source, you need <strong>Rust 2021 edition or later</strong>.
+            To build Kria from source, you need the <strong>Rust toolchain</strong>. Kria is
+            built using the Rust 2021 edition.
             Install Rust using <a href="https://rustup.rs/" target="_blank">rustup</a>.
           </p>
           <pre><code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code></pre>
@@ -47,12 +48,12 @@
         <section class="content-block" id="installation">
           <h2>Installation</h2>
           <p>Clone the repository and build Kria in release mode:</p>
-          <pre><code>git clone https://github.com/krialabs/kria-lang.git
+          <pre><code>git clone https://github.com/Kria-Labs/kria-lang.git
 cd kria-lang
 cargo build --release</code></pre>
           <p>
-            The compiled binary will be at <code>target/release/kria</code>. 
-            You can add it to your PATH or run it directly.
+            The compiled binary will be at <code>target/release/kria</code>
+            (<code>kria.exe</code> on Windows). You can add it to your PATH or run it directly.
           </p>
         </section>
 
@@ -63,7 +64,11 @@ cargo build --release</code></pre>
 set y = 3
 print(x + y)</code></pre>
           <p>Run it with:</p>
-          <pre><code>./target/release/kria hello.krx</code></pre>
+          <pre><code># Linux / macOS
+./target/release/kria hello.krx
+
+# Windows PowerShell
+.\target\release\kria.exe .\hello.krx</code></pre>
           <p>Output: <code>8</code></p>
         </section>
 

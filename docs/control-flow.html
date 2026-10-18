@@ -49,16 +49,17 @@ if (age >= 18) {
           <pre><code>set score = 75
 if (score >= 90) {
     print("A")
+} elseif (score >= 80) {
+    print("B")
 } else {
-    if (score >= 80) {
-        print("B")
-    } else {
-        print("C")
-    }
+    print("C")
 }</code></pre>
           <p>
-            Each branch is evaluated only if the previous condition is false. 
-            All branches are optional.
+            Use the single keyword <code>elseif</code> (not <code>else if</code>) for
+            additional conditions. Each branch is tested in order; the initial
+            <code>if</code> is required, while <code>elseif</code> branches and the final
+            <code>else</code> are optional. Conditions must evaluate to booleans; other
+            values are not implicitly treated as true or false.
           </p>
         </section>
 
@@ -105,8 +106,10 @@ for key, value in user {
     print(value)
 }</code></pre>
           <p>
-            Arrays use single iteration variable; objects use two (key and value). 
-            The loop processes each element in order.
+            Use one loop variable to iterate an array's values and two to iterate an
+            object's keys and values. Object keys are visited in insertion order. An
+            array loop reads elements as it advances; an object loop uses the keys
+            present when iteration begins.
           </p>
         </section>
 

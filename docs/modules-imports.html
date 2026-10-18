@@ -47,7 +47,9 @@
           <pre><code>kria main.krx</code></pre>
           <p>
             The main file can import other modules. 
-            Only the main entry file is compiled and executed; imports are resolved relative to it.
+            The entry file and its imported dependencies are compiled as one project and
+            executed together. Each import path is resolved relative to the file that
+            contains that import.
           </p>
         </section>
 
@@ -85,8 +87,9 @@ import math from "./math.krx"
 print(math.add(2, 3))
 print(math.mul(4, 5))</code></pre>
           <p>
-            The alias becomes a namespace containing all exported functions from that module. 
-            Call exported functions via the alias.
+            Use the import alias to refer to an exported function. The compiler resolves
+            these references to the imported function; the alias is not a general-purpose
+            runtime module object. Only exported functions are available this way.
           </p>
         </section>
 
@@ -102,6 +105,13 @@ print(math.mul(4, 5))</code></pre>
           </ul>
           <p>
             Paths are resolved relative to the file doing the importing.
+          </p>
+          <p>
+            Imports must be at module top level and use the <code>.krx</code> extension.
+            Circular imports are rejected. The current system has no package registry or
+            non-relative package search path; the REPL does not support imports.
+            Module globals share the compiled program's global namespace, so avoid
+            reusing global names across files.
           </p>
           <h3>Project Structure Example</h3>
           <pre><code>project/
@@ -127,8 +137,8 @@ import utils from "./utils/helpers.krx"</code></pre>
             <li><strong>Document exports</strong> — Add comments explaining exported functions</li>
           </ul>
           <p>
-            Kria's package manager (KPM) is planned for the future, 
-            which will add registry-based packages on top of file imports.
+            Kria's package manager (KPM) is planned; the current language repository
+            documents only relative file imports.
           </p>
         </section>
       </div>

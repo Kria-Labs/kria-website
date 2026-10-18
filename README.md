@@ -12,7 +12,8 @@ Live: [krialang.vercel.app](https://krialang.vercel.app)
 |------|-------------|
 | `index.html` | Home — features, pipeline overview, quick example |
 | `docs.html` | Documentation hub |
-| `download.html` | Build and install instructions |
+| `docs/` | Language guides, built-ins, performance, and architecture |
+| `playground.html` | Browser-based editor preview (the Kria runtime is not connected) |
 | `kpm.html` | Kria Package Manager page |
 | `about.html` | About Kria Labs |
 

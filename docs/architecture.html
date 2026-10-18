@@ -40,12 +40,16 @@
         <section class="content-block" id="pipeline">
           <h2>Compilation Pipeline</h2>
           <p>
-            Kria programs are compiled through multiple stages before execution:
+            A source file is tokenized, parsed, and compiled to bytecode before it
+            executes on the stack-based virtual machine. File execution also loads
+            imported modules and finalizes the compiled bytecode through Kria's
+            bytecode-lifted IR optimization pipeline:
           </p>
-          <pre><code>Source (.krx) → Lexer → Parser → Compiler → Bytecode → VM</code></pre>
+          <pre><code>Entry .krx → Module graph → Compiler → Bytecode → IR lift → IR optimization → Bytecode emission/optimization → VM</code></pre>
           <p>
-            Each stage transforms the input into an intermediate representation. 
-            The final bytecode is executed on a stack-based virtual machine.
+            This is the file-execution path. The REPL keeps its compiler and VM state
+            between inputs and does not use the same finalization pipeline; imports
+            are not supported in the REPL.
           </p>
         </section>
 
@@ -127,14 +131,12 @@
           </p>
           <h3>Constant Pool</h3>
           <p>
-            All literals and symbols are stored in a constant pool, indexed by bytecode instructions:
+            Runtime values used as constants are stored in a constant pool and referenced
+            by bytecode instructions. Global names are resolved separately to indexed slots.
           </p>
           <ul>
-            <li>String literals</li>
-            <li>Numbers</li>
-            <li>Function names</li>
-            <li>Variable names</li>
-            <li>Object property keys</li>
+            <li>Literal strings and numbers</li>
+            <li>Other constant values emitted by the compiler</li>
           </ul>
           <h3>Instruction Format</h3>
           <p>
@@ -145,7 +147,7 @@
             <li><code>OP_POP</code> — Pop the top stack value</li>
             <li><code>OP_CALL_FUNCTION</code> — Call a function</li>
             <li><code>OP_JUMP</code> — Unconditional jump</li>
-            <li><code>OP_LOOP_INC_LESS</code> — Combined increment-and-loop (optimization)</li>
+            <li>Specialized counter-loop instructions for recognized patterns</li>
           </ul>
           <p>
             See the source code for the full opcode list.
@@ -168,43 +170,48 @@
           </ul>
           <h3>Call Frames</h3>
           <p>
-            Each function call has a frame:
+            Each function call has a frame that tracks:
           </p>
           <ul>
-            <li>Local variables (in a hash map)</li>
-            <li>Return address (bytecode offset)</li>
-            <li>Parent frame (for closure capture)</li>
+            <li>Return address and local stack start</li>
+            <li>Captured upvalues used by closures</li>
+            <li>Parameters and local slots on the VM stack</li>
           </ul>
           <h3>Global Scope</h3>
           <p>
-            Global variables are stored in a separate hash map. 
-            Functions can access and modify globals.
+            Global names are resolved by the compiler to indexed global slots.
+            Function parameters are local; a name assigned only inside a function
+            with <code>set</code> is not automatically declared as a local and can
+            resolve to a global.
           </p>
         </section>
 
         <section class="content-block" id="optimization">
           <h2>Optimizations</h2>
           <p>
-            Kria includes several runtime optimizations:
+            Kria applies several compiler and VM optimizations:
           </p>
           <h3>Combined Loop Instructions</h3>
           <p>
-            Counted loops compile to specialized opcodes that combine multiple operations:
+            The compiler recognizes some counter-loop patterns and may emit
+            specialized instructions:
           </p>
           <ul>
-            <li><code>OP_LOOP_INC_LESS</code> — Increment and compare in one instruction</li>
-            <li><code>OP_LOOP_INC_LTE</code> — Increment and compare (less-than-or-equal)</li>
+            <li>Fused increment-and-compare instructions for recognized loops</li>
+            <li>Specialized array iteration instructions</li>
           </ul>
           <p>
-            This reduces dispatch overhead for tight loops.
+            These fast paths are pattern-dependent; they do not apply to every loop.
           </p>
           <h3>Global Variable Optimizations</h3>
           <p>
-            Global arithmetic operations are optimized to avoid function call overhead.
+            Some global arithmetic and string-append operations use specialized
+            instructions. Constant dot-property reads can also use a VM object-shape
+            cache.
           </p>
           <h3>Constant Folding</h3>
           <p>
-            Compile-time constant expressions are pre-computed.
+            Constant expressions can be pre-computed by compiler and IR passes.
           </p>
         </section>
 

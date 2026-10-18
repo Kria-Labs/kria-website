@@ -29,6 +29,7 @@
             <li><a href="#input-str">input&lt;str&gt;</a></li>
             <li><a href="#input-int">input&lt;int&gt;</a></li>
             <li><a href="#input-float">input&lt;float&gt;</a></li>
+            <li><a href="#input-union">Multiple input types</a></li>
             <li><a href="#interactive">Interactive Programs</a></li>
           </ul>
         </nav>
@@ -64,11 +65,11 @@ print(x + y)</code></pre>
           <p>
             Read a string from the user with <code>input&lt;str&gt;(prompt)</code>:
           </p>
-          <pre><code>set name = input<str>("What is your name?")
+          <pre><code>set name = input&lt;str&gt;("What is your name?")
 print("Hello, ")
 print(name)
 
-set color = input<str>("Your favorite color?")
+set color = input&lt;str&gt;("Your favorite color?")
 print("You like: ")
 print(color)</code></pre>
           <p>
@@ -82,17 +83,17 @@ print(color)</code></pre>
           <p>
             Read an integer with <code>input&lt;int&gt;(prompt)</code>:
           </p>
-          <pre><code>set number = input<int>("Enter an integer:")
+          <pre><code>set number = input&lt;int&gt;("Enter an integer:")
 print("Number you entered: ")
 print(number)
 
-set a = input<int>("First number:")
-set b = input<int>("Second number:")
+set a = input&lt;int&gt;("First number:")
+set b = input&lt;int&gt;("Second number:")
 print("Sum: ")
 print(a + b)</code></pre>
           <p>
-            The input is parsed as an integer. 
-            If the user enters non-numeric input, an error occurs.
+            Input is trimmed and parsed as an integer. Invalid input is rejected and
+            the program prompts again. Input is read synchronously from standard input.
           </p>
         </section>
 
@@ -101,17 +102,34 @@ print(a + b)</code></pre>
           <p>
             Read a decimal number with <code>input&lt;float&gt;(prompt)</code>:
           </p>
-          <pre><code>set float_num = input<float>("Enter a decimal:")
+          <pre><code>set float_num = input&lt;float&gt;("Enter a decimal:")
 print("You entered: ")
 print(float_num)
 
-set x = input<float>("First decimal:")
-set y = input<float>("Second decimal:")
+set x = input&lt;float&gt;("First decimal:")
+set y = input&lt;float&gt;("Second decimal:")
 print("Sum: ")
 print(x + y)</code></pre>
           <p>
-            The input is parsed as a floating-point number. 
-            Supports decimal notation.
+            Input is trimmed and parsed as a floating-point number; invalid values are
+            rejected and the program prompts again. Decimal and scientific notation are
+            supported. Non-finite float input is rejected.
+          </p>
+        </section>
+
+        <section class="content-block" id="input-union">
+          <h2>Accepting Multiple Input Types</h2>
+          <p>
+            Combine <code>int</code>, <code>float</code>, and <code>str</code> with
+            <code>|</code> to accept a numeric value or text. For a numeric input, Kria
+            tries integer parsing first and then float parsing; text is accepted when
+            it does not parse as a number.
+          </p>
+          <pre><code>set value = input&lt;int|float|str&gt;("Enter a number or text: ")
+print(type(value))</code></pre>
+          <p>
+            The prompt must evaluate to a string. These input forms require stdin and
+            are intended for interactive programs.
           </p>
         </section>
 
@@ -121,15 +139,15 @@ print(x + y)</code></pre>
             Combine input and output to create interactive programs:
           </p>
           <pre><code>print("--- Simple Calculator ---")
-set num1 = input<int>("First number:")
-set num2 = input<int>("Second number:")
+set num1 = input&lt;int&gt;("First number:")
+set num2 = input&lt;int&gt;("Second number:")
 
 set sum = num1 + num2
 print("Sum: ")
 print(sum)
 
 print("--- Age Categorization ---")
-set age = input<int>("Your age:")
+set age = input&lt;int&gt;("Your age:")
 
 if (age < 13) {
     print("Child")

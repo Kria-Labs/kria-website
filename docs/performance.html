@@ -37,8 +37,10 @@
         <section class="content-block" id="loops">
           <h2>Loop Optimization</h2>
           <p>
-            Kria's VM includes combined loop instructions that optimize counting loops. 
-            The compiler recognizes patterns like <code>i = i + 1</code> and generates specialized bytecode.
+            Kria's compiler and VM include specialized paths for some recognized
+            counter-loop patterns, global arithmetic, array iteration, and string
+            appends. These optimizations are pattern-dependent; do not assume every
+            loop is lowered to a single instruction.
           </p>
           <h3>Counted Loop Pattern</h3>
           <p>
@@ -49,13 +51,14 @@ while (i < 1000000) {
     set i = i + 1
 }</code></pre>
           <p>
-            This pattern compiles to a single specialized opcode, 
-            reducing dispatch overhead on each iteration.
+            The compiler may recognize this counter-loop pattern and emit specialized
+            bytecode. Verify performance with a benchmark rather than assuming the
+            optimization is applied to every variation.
           </p>
           <h3>Loop Structure Tips</h3>
           <ul>
-            <li>Use <code>while</code> for counted loops</li>
-            <li>Use <code>for-in</code> for iterating collections</li>
+            <li>Use <code>while</code> for condition-based loops</li>
+            <li>Use <code>for-in</code> to iterate arrays and objects</li>
             <li>Avoid function calls in hot loops when possible</li>
             <li>Minimize operations in loop bodies</li>
           </ul>
@@ -138,7 +141,42 @@ while (i < 1000000) {
         <section class="content-block" id="benchmarking">
           <h2>Benchmarking</h2>
           <p>
-            Use <code>wait()</code> to measure execution time of code sections:
+            <code>wait()</code> pauses execution; it does not measure elapsed time.
+            For reproducible measurements, use the benchmark suite in the
+            <a href="https://github.com/Kria-Labs/kria-lang/tree/main/benchmarks">Kria language repository</a>.
+            It compares equivalent workloads and reports VM execution separately from
+            compilation, process time, and startup overhead.
+          </p>
+          <p>
+            Kria workload templates are in <code>benchmarks/kria/</code>. They use the
+            <code>.krx.in</code> suffix because the runner replaces <code>{{N}}</code>
+            with the selected workload size before executing them as Kria source files.
+            Run <code>node benchmarks/run.mjs</code> from the language repository root;
+            the default run uses both small and large sizes, with two warmups and seven
+            measured runs.
+          </p>
+          <table class="compare-table">
+            <thead>
+              <tr><th>Workload</th><th>What the Kria template does</th><th>Small / large size</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>arithmetic</td><td>Integer arithmetic in a counted loop</td><td>2,000,000 / 8,000,000</td></tr>
+              <tr><td>branching</td><td>Counted loop with a conditional branch</td><td>2,000,000 / 8,000,000</td></tr>
+              <tr><td>nested-loops</td><td>Nested loops accumulating both indexes</td><td>1,500 / 3,500</td></tr>
+              <tr><td>function-calls</td><td>Repeated calls to a two-argument function</td><td>750,000 / 3,000,000</td></tr>
+              <tr><td>recursion</td><td>Sum of Fibonacci values using naive recursion</td><td>20 / 25</td></tr>
+              <tr><td>closures</td><td>Repeated calls to a function using a multiplier</td><td>750,000 / 3,000,000</td></tr>
+              <tr><td>arrays</td><td>Append integers, traverse the array, and sum it</td><td>150,000 / 600,000</td></tr>
+              <tr><td>objects</td><td>Repeated property reads/writes with a checksum</td><td>150,000 / 600,000</td></tr>
+              <tr><td>strings</td><td>Repeated single-character concatenation</td><td>8,000 / 20,000</td></tr>
+            </tbody>
+          </table>
+          <p>
+            Note: despite its workload name and suite description, the current
+            <code>closures.krx.in</code> template assigns <code>factor</code> at the
+            top level. Under Kria's current name-resolution rules that is a global
+            lookup, not a captured function-local upvalue, so this case should not be
+            treated as a benchmark of lexical closure capture.
           </p>
           <pre><code>fn timed_operation() {
     set i = 0
@@ -147,12 +185,12 @@ while (i < 1000000) {
     }
 }
 
-print("Starting benchmark...")
+print("Starting workload...")
 timed_operation()
-print("Completed")</code></pre>
+print("Completed workload")</code></pre>
           <p>
-            For more detailed benchmarking, wrap code sections and use system timing. 
-            The Kria repository includes performance test examples.
+            The example above runs a workload but does not time it. For the repository
+            suite, Node.js 16.6 or newer is required; Python is optional.
           </p>
           <p>
             When optimizing:
@@ -160,8 +198,8 @@ print("Completed")</code></pre>
           <ul>
             <li>Test with realistic data sizes</li>
             <li>Consider both time and readability</li>
-            <li>Profile different approaches</li>
-            <li>Share benchmarks in pull requests for optimization PRs</li>
+            <li>Measure equivalent workloads and report the workload size and run settings</li>
+            <li>Separate VM execution time from compilation and process startup time</li>
           </ul>
         </section>
       </div>

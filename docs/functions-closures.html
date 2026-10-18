@@ -106,23 +106,25 @@ print(times_three(7))</code></pre>
         <section class="content-block" id="closures">
           <h2>Closures</h2>
           <p>
-            Functions can capture variables from their enclosing scope (closure). 
-            Captured values are copied when the function is created (copy-on-create semantics):
+            A closure can capture a parameter or an enclosing function's captured value.
+            Captured variables can be updated through the closure and retain that update
+            between calls:
           </p>
-          <pre><code>fn create_counter() {
-    set count = 0
+          <pre><code>fn create_counter(count) {
     return fn() {
         set count = count + 1
         return count
     }
 }
 
-set counter = create_counter()
+set counter = create_counter(0)
 print(counter())
 print(counter())</code></pre>
           <p>
-            Each function has its own copy of captured variables, 
-            so they don't interfere with each other.
+            Each call to <code>create_counter</code> receives its own parameter value,
+            so its returned closure has independent counter state. Within a function,
+            parameters are local; a name introduced only by <code>set</code> is not a
+            new local variable and may resolve to a global instead.
           </p>
         </section>
 

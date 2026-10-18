@@ -46,22 +46,26 @@ print([1, 2, 3])</code></pre>
           <p>Returns <code>null</code>. Accepts any value.</p>
 
           <h3>input&lt;str&gt;(prompt)</h3>
-          <p>Read a string from the user with an optional prompt.</p>
-          <pre><code>set name = input<str>("Enter name: ")
+          <p>Read a string from standard input after displaying a string prompt.</p>
+          <pre><code>set name = input&lt;str&gt;("Enter name: ")
 print(name)</code></pre>
-          <p>Returns the input string without trailing newline.</p>
+          <p>Returns the trimmed input string.</p>
 
           <h3>input&lt;int&gt;(prompt)</h3>
-          <p>Read an integer from the user with an optional prompt.</p>
-          <pre><code>set age = input<int>("Age: ")
+          <p>Read an integer from standard input after displaying a string prompt.</p>
+          <pre><code>set age = input&lt;int&gt;("Age: ")
 print(age + 1)</code></pre>
-          <p>Returns the input as a number. Errors if input is not numeric.</p>
+          <p>Returns an integer. Invalid input is rejected and the program prompts again.</p>
 
           <h3>input&lt;float&gt;(prompt)</h3>
-          <p>Read a decimal number from the user with an optional prompt.</p>
-          <pre><code>set price = input<float>("Price: ")
+          <p>Read a floating-point number from standard input after displaying a string prompt.</p>
+          <pre><code>set price = input&lt;float&gt;("Price: ")
 print(price * 1.1)</code></pre>
-          <p>Returns the input as a floating-point number.</p>
+          <p>Returns a double-precision float. Invalid and non-finite input is rejected.</p>
+          <h3>input&lt;int|float|str&gt;(prompt)</h3>
+          <p>Accept an integer, float, or text value. Kria tries integer parsing, then float parsing, then accepts text that does not parse as a number.</p>
+          <pre><code>set value = input&lt;int|float|str&gt;("Value: ")
+print(type(value))</code></pre>
         </section>
 
         <section class="content-block" id="type-check">
@@ -80,6 +84,7 @@ print(type(fn(x) { return x }))</code></pre>
           <p>
             Returns one of: <code>"number"</code>, <code>"string"</code>, <code>"boolean"</code>, 
             <code>"null"</code>, <code>"array"</code>, <code>"object"</code>, or <code>"function"</code>.
+            Integers and floats both report as <code>"number"</code>.
           </p>
         </section>
 
@@ -120,7 +125,7 @@ print(arr)</code></pre>
 set last = pop(arr)
 print(last)
 print(arr)</code></pre>
-          <p>Returns the removed element. Returns <code>null</code> for empty arrays.</p>
+          <p>Returns the removed element. Popping an empty array is an error.</p>
 
           <h3>.length property</h3>
           <p>Get the number of elements in an array.</p>
